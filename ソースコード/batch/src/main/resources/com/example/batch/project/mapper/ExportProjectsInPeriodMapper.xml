@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.project.mapper.ExportProjectsInPeriodMapper">
+    <select id="selectProjectsInPeriod" resultType="com.example.common.generated.model.Project">
+    <![CDATA[
+        select
+            project_id,
+            project_name,
+            project_type,
+            project_class,
+            project_start_date,
+            project_end_date,
+            organization_id,
+            client_id,
+            project_manager,
+            project_leader,
+            note,
+            sales,
+            version_no
+        from
+            project
+        where
+            project_start_date <= #{businessDate}
+            and project_end_date >= #{businessDate}
+        order by
+            project_start_date,
+            project_end_date,
+            project_name
+    ]]>
+    </select>
+</mapper>

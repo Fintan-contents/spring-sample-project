@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, false)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <script src="../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <title>エラー画面</title>
+  </head>
+
+  <body class="container">
+    <div class="d-flex justify-content-center">
+      <span class="text-danger fs-2">不正な画面遷移を検出したため、処理を中断しました。</span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+alter sequence public.project_project_id_seq restart with 3;

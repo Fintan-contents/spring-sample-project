@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <script src="../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <title>Menu</title>
+  </head>
+
+  <body>
+    <nav th:fragment="menu" class="nav flex-column border rounded">
+      <div class="card">
+        <div class="card-header">
+          <span class="fs-5 fw-bold">プロジェクト管理</span>
+        </div>
+        <div class="card-body">
+          <div>
+            <a th:href="@{/project/search}" class="link-secondary text-decoration-none" href="../project/search/index.html"
+              >プロジェクト検索</a
+            >
+          </div>
+          <div>
+            <a
+              sec:authorize-url="/project/create"
+              th:href="@{/project/create}"
+              class="link-secondary text-decoration-none"
+              href="../project/create/index.html"
+              >プロジェクト登録</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>

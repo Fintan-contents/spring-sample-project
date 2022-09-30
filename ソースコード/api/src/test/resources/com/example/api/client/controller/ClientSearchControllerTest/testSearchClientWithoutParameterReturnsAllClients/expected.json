@@ -1,0 +1,40 @@
+{
+  "clients": [
+    {
+      "clientId": 1,
+      "clientName": "テスト会社１（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    },
+    {
+      "clientId": 3,
+      "clientName": "テスト会社２（建設業）",
+      "industryCode": "02",
+      "versionNo": 1
+    },
+    {
+      "clientId": 2,
+      "clientName": "テスト会社２（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    },
+    {
+      "clientId": 5,
+      "clientName": "テスト会社３（建設業）",
+      "industryCode": "02",
+      "versionNo": 1
+    },
+    {
+      "clientId": 6,
+      "clientName": "テスト会社３（製造業）",
+      "industryCode": "03",
+      "versionNo": 1
+    },
+    {
+      "clientId": 4,
+      "clientName": "テスト会社３（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "faultCode": "FB1999901",
+    "messages": [
+      "clientName:不正な文字種の値が指定されました。",
+      "industryCode:不正な値が指定されました。"
+    ]
+}

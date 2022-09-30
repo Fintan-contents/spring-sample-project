@@ -1,0 +1,2 @@
+mail_template_id,lang,subject,charset,mail_body
+example,ja,テストメール,UTF-8,これはテストメールです。

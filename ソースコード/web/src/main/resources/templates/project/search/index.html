@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>プロジェクト検索</title>
+  </head>
+
+  <body class="container">
+    <span th:if="${message}" th:text="${message}"></span>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">プロジェクト検索</div>
+      </div>
+    </div>
+    <form method="GET" th:action="@{/project/search/search}" action="./index.html" th:object="${projectSearchForm}">
+      <span th:if="${(searchResult != null and searchResult.totalElements == 0)}" th:text="#{errors.nothing.search.project}" class="text-danger fw-bold"></span>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="divisionId" class="form-label fw-bold">事業部</label>
+          <select
+            th:field="*{divisionId}"
+            class="form-select"
+            th:errorclass="is-invalid"
+            >
+            <option value=""></option>
+            <option
+              th:each="topOrg : ${topOrganizations}"
+              th:value="${topOrg.organizationId}"
+              th:text="${topOrg.organizationName}"
+            >
+              ...
+            </option>
+          </select>
+          <span th:if="${#fields.hasErrors('divisionId')}" th:errors="*{divisionId}" class="invalid-feedback"></span>
+        </div>
+        <div class="col-6">
+          <label for="organizationId" class="form-label fw-bold">部門</label>
+          <select
+            th:field="*{organizationId}"
+            class="form-select"
+            th:errorclass="is-invalid"
+            >
+            <option value=""></option>
+            <option
+              th:each="subOrg : ${subOrganizations}"
+              th:value="${subOrg.organizationId}"
+              th:text="${subOrg.organizationName}"
+            >
+              ...
+            </option>
+          </select>
+          <span th:if="${#fields.hasErrors('organizationId')}" th:errors="*{organizationId}" class="invalid-feedback"></span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <div class="form-label fw-bold">PJ種別</div>
+          <div
+            class="form-check form-check-inline"
+            th:each="codeValue : ${@codeViewHelper.getValues('C0300001','pattern01')}"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              th:field="*{projectTypes}"
+              th:value="${codeValue}"
+              th:errorclass="is-invalid"
+            />
+            <label th:for="${#ids.prev('projectTypes')}" class="form-check-label" th:text="${@codeViewHelper.getName('C0300001',codeValue)}">SS</label>
+          </div>
+          <span th:if="${#fields.hasErrors('projectTypes')}" th:errors="*{projectTypes}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <div class="form-label fw-bold">PJ分類</div>
+          <div
+            class="form-check form-check-inline"
+            th:each="codeValue : ${@codeViewHelper.getValues('C0200001','pattern01')}"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              th:field="*{projectClasses}"
+              th:value="${codeValue}"
+              th:errorclass="is-invalid"
+              />
+            <label th:for="${#ids.prev('projectClasses')}" class="form-check-label" th:text="${@codeViewHelper.getName('C0200001',codeValue)}">SS</label>
+          </div>
+          <span th:if="${#fields.hasErrors('projectClasses')}" th:errors="*{projectClasses}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="salesFrom" class="form-label fw-bold">売上高_実績_FROM(千円)</label>
+          <input
+            type="text"
+            th:field="*{salesFrom}"
+            placeholder="売上高_実績_FROM"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('salesFrom') || #fields.hasErrors('salesFromLessThanSalesTo')} ? 'is-invalid' : ''"
+            maxlength="9"
+          />
+          <span th:if="${#fields.hasErrors('salesFrom')}" th:errors="*{salesFrom}" class="invalid-feedback"></span>
+          <span th:if="${#fields.hasErrors('salesFromLessThanSalesTo')}" th:errors="*{salesFromLessThanSalesTo}"  class="invalid-feedback"></span>
+        </div>
+        <div class="col-6">
+          <label for="salesTo" class="form-label fw-bold">売上高_実績_TO(千円)</label>
+          <input
+            type="text"
+            th:field="*{salesTo}"
+            placeholder="売上高_実績_TO"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('salesTo') || #fields.hasErrors('salesFromLessThanSalesTo')} ? 'is-invalid' : ''"
+            maxlength="9"
+          />
+          <span th:if="${#fields.hasErrors('salesTo')}" th:errors="*{salesTo}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="projectStartDateFrom" class="form-label fw-bold">開始日_FROM</label>
+          <input
+            type="date"
+            th:field="*{projectStartDateFrom}"
+            placeholder="開始日_FROM"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('projectStartDateFrom')|| #fields.hasErrors('startDateFromBeforeToDate')} ? 'is-invalid' : ''"
+          />
+          <span th:if="${#fields.hasErrors('projectStartDateFrom')}" th:errors="*{projectStartDateFrom}" class="invalid-feedback"></span>
+          <span th:if="${#fields.hasErrors('startDateFromBeforeToDate')}" th:errors="*{startDateFromBeforeToDate}" class="invalid-feedback"></span>
+        </div>
+        <div class="col-6">
+          <label for="projectStartDateTo" class="form-label fw-bold">開始日_TO</label>
+          <input
+            type="date"
+            th:field="*{projectStartDateTo}"
+            placeholder="開始日_TO"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('projectStartDateTo') || #fields.hasErrors('startDateFromBeforeToDate')} ? 'is-invalid' : ''"
+          />
+          <span th:if="${#fields.hasErrors('projectStartDateTo')}" th:errors="*{projectStartDateTo}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="projectEndDateFrom" class="form-label fw-bold">終了日_FROM</label>
+          <input
+            type="date"
+            th:field="*{projectEndDateFrom}"
+            placeholder="終了日_FROM"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('projectEndDateFrom') || #fields.hasErrors('endDateFromBeforeToDate')} ? 'is-invalid' : ''"
+          />
+          <span th:if="${#fields.hasErrors('projectEndDateFrom')}" th:errors="*{projectEndDateFrom}" class="invalid-feedback"></span>
+          <span th:if="${#fields.hasErrors('endDateFromBeforeToDate')}" th:errors="*{endDateFromBeforeToDate}" class="invalid-feedback"></span>
+        </div>
+        <div class="col-6">
+          <label for="projectEndDateTo" class="form-label fw-bold">終了日_TO</label>
+          <input
+            type="date"
+            th:field="*{projectEndDateTo}"
+            placeholder="終了日_TO"
+            class="form-control"
+            th:classappend="${#fields.hasErrors('projectEndDateTo') || #fields.hasErrors('endDateFromBeforeToDate')} ? 'is-invalid' : ''"
+          />
+          <span th:if="${#fields.hasErrors('projectEndDateTo')}" th:errors="*{projectEndDateTo}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+        <label for="projectName" class="form-label fw-bold">プロジェクト名で検索</label>
+        <input
+          type="text"
+          th:field="*{projectName}"
+          placeholder="プロジェクト名で検索"
+          class="form-control"
+          th:errorclass="is-invalid"
+          maxlength="128"
+        />
+        <span th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <input type="hidden" value="0" name="pageNumber" />
+      <div class="row justify-content-center pt-4">
+        <div class="col-2">
+          <input class="btn btn-primary w-100" type="submit" value="検索" />
+        </div>
+      </div>
+    </form>
+    <!--/* 以下検索結果時に表示する領域 */-->
+    <th:block th:if="${!(searchResult == null || searchResult.totalElements == 0)}">
+      <div th:replace="common/paging :: navigation('/project/search/search', ${searchResult})"></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">PJ名</th>
+            <th scope="col">事業部</th>
+            <th scope="col">部門</th>
+            <th scope="col">PJ種別</th>
+            <th scope="col">PJ分類</th>
+            <th scope="col">PM</th>
+            <th scope="col">売上高_実績(千円)</th>
+            <th scope="col">開始日</th>
+            <th scope="col">終了日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="project : ${searchResult.content}" th:object="${project}">
+            <td>
+              <a th:href="@{/project/detail/(projectId=*{projectId})}" href="../detail/index.html" th:text="*{projectName}"
+                >プロジェクト名1</a
+              >
+            </td>
+            <td th:text="*{divisionName}">A事業部</td>
+            <td th:text="*{organizationName}">C部門</td>
+            <td th:text="*{@codeViewHelper.getName('C0300001',projectType)}">新規開発ＰＪ</td>
+            <td th:text="*{@codeViewHelper.getName('C0200001',projectClass)}">ＳＳ</td>
+            <td th:text="*{projectManager}">マネージャー１</td>
+            <td th:text="*{#numbers.formatInteger(sales, 0, 'COMMA')}">10,000</td>
+            <td th:text="*{#temporals.format(projectStartDate, 'uuuu/MM/dd')}">2019/06/01</td>
+            <td th:text="*{#temporals.format(projectEndDate, 'uuuu/MM/dd')}">2019/12/31</td>
+          </tr>
+        </tbody>
+      </table>
+    </th:block>
+  </body>
+</html>

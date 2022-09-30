@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <script src="../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <meta name="_client_api_url" content="http://localhost:8090" />
+    <title>顧客選択ポップアップ</title>
+  </head>
+  <body>
+    <!--/* サンプル表示用の領域 */-->
+    <div class="container">
+      <h5 class="mt-5 mb-4">サブウィンドウを表示</h5>
+      <div class="row">
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-info text-light w-100"
+            data-bs-toggle="modal"
+            data-bs-target="#clientModal"
+          >
+            サブウィンドウを表示
+          </button>
+        </div>
+        <div class="col-4">
+          <input
+            type="text"
+            id="clientName"
+            class="form-control"
+            placeholder="選択結果の反映場所"
+            readonly="true"
+            value=""
+          />
+          <input type="hidden" id="clientId" />
+        </div>
+      </div>
+    </div>
+    <!--/* サンプル表示用の領域 */-->
+
+    <div th:fragment="selectClientModal">
+      <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <span class="fs-5" id="clientModalLabel">顧客情報を検索</span>
+              <div class="row mt-3 mb-3">
+                <div id="messageArea" class="mb-2"></div>
+                <div class="col-5">
+                  <label for="selectClientName" class="form-label">顧客名</label>
+                  <input type="text" class="form-control" id="selectClientName" placeholder="顧客名" maxlength="128" />
+                </div>
+                <div class="col-5">
+                  <label for="industryCode" class="form-label">業種</label>
+                  <select id="industryCode" class="form-select">
+                    <option value="">業種</option>
+                    <option value="01">農業</option>
+                    <option value="02">建設業</option>
+                    <option value="03">製造業</option>
+                  </select>
+                </div>
+                <div class="col-2">
+                  <label class="form-label">&nbsp;</label>
+                  <button type="button" id="selectClient" class="btn btn-info text-light w-100">検索</button>
+                </div>
+              </div>
+            </div>
+            <!--/* style="display: none"の設定によって検索イベント実行まではこの領域を非表示とする */-->
+            <div class="modal-body border-top" id="clientResultArea" style="display: none">
+              <span class="fs-5" id="clientModalLabel">顧客情報を選択</span>
+              <div class="row mt-1 mb-3">
+                <span>検索結果：<span id="numberOfClients" class="fs-5 fw-bold"></span>&nbsp;件</span>
+                <div class="col-10 mt-1">
+                  <select id="clientList" class="form-select">
+                    <option value="">検索結果から選択してください。</option>
+                  </select>
+                </div>
+                <div class="col-2">
+                  <!--/* プルダウンリストが初期値の場合はボタンを無効化(disabled)する */-->
+                  <button
+                    type="button"
+                    id="apply"
+                    class="btn btn-info text-light w-100"
+                    data-bs-dismiss="modal"
+                    disabled
+                  >
+                    選択
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

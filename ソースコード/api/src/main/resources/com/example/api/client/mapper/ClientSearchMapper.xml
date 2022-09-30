@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.client.mapper.ClientSearchMapper">
+
+    <sql id="whereClauseForList">
+        <where>
+            <if test="clientName != null">
+                and client_name like #{clientName} || '%'
+            </if>
+            <if test="industryCode != null">
+                and industry_code = #{industryCode}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectClientByCriteria" resultType="Client">
+        select
+            client_id,
+            client_name,
+            industry_code,
+            version_no
+        from
+            client
+            <if test="_parameter != null">
+                <include refid="whereClauseForList"/>
+            </if>
+        order by
+            client_name
+    </select>
+
+    <select id="countClientByCriteria" resultType="_long">
+        select
+            count(*)
+        from
+            client
+        <if test="_parameter != null">
+            <include refid="whereClauseForList"/>
+        </if>
+    </select>
+
+</mapper>

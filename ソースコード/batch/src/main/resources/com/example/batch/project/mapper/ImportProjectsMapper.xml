@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.project.mapper.ImportProjectsMapper">
+    <select id="selectProjectByIdForUpdate" resultType="com.example.common.generated.model.Project">
+        select
+            project_id,
+            project_name,
+            project_type,
+            project_class,
+            project_start_date,
+            project_end_date,
+            organization_id,
+            client_id,
+            project_manager,
+            project_leader,
+            note,
+            sales,
+            version_no
+        from
+            project
+        where
+            project_id = #{projectId}
+        for update
+    </select>
+
+    <select id="selectOrganizationById" resultType="com.example.common.generated.model.Organization">
+        select
+            organization_id,
+            organization_name,
+            upper_organization
+        from
+            organization
+        where
+            organization_id = #{organizationId}
+    </select>
+
+    <select id="selectProjectWorksInPeriod" resultType="com.example.common.generated.model.ProjectWork">
+    <![CDATA[
+        select
+            project_work_id,
+            project_id,
+            project_name,
+            project_type,
+            project_class,
+            project_start_date,
+            project_end_date,
+            organization_id,
+            client_id,
+            project_manager,
+            project_leader,
+            note,
+            sales
+        from
+            project_work
+        order by
+            project_work_id
+    ]]>
+    </select>
+
+    <update id="updateProject">
+        update
+            project
+        set
+            project_name = #{projectName},
+            project_type = #{projectType},
+            project_class = #{projectClass},
+            project_start_date = #{projectStartDate},
+            project_end_date = #{projectEndDate},
+            organization_id = #{organizationId},
+            client_id = #{clientId},
+            project_manager = #{projectManager},
+            project_leader = #{projectLeader},
+            note = #{note},
+            sales = #{sales},
+            version_no = version_no + 1
+        where
+            project_id = #{projectId}
+    </update>
+
+    <insert id="insertProject">
+        insert into
+            project
+            (
+            project_name,
+            project_type,
+            project_class,
+            project_start_date,
+            project_end_date,
+            organization_id,
+            client_id,
+            project_manager,
+            project_leader,
+            note,
+            sales,
+            version_no
+            )
+        values
+            (
+            #{projectName},
+            #{projectType},
+            #{projectClass},
+            #{projectStartDate},
+            #{projectEndDate},
+            #{organizationId},
+            #{clientId},
+            #{projectManager},
+            #{projectLeader},
+            #{note},
+            #{sales},
+            #{versionNo}
+            )
+    </insert>
+</mapper>

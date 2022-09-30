@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.security.mapper.SecurityLoginMapper">
+
+    <select id="selectSystemAccountByLoginId" resultType="com.example.common.generated.model.SystemAccount">
+        select
+            user_id,
+            login_id,
+            user_password,
+            password_expiration_date,
+            failed_count,
+            effective_date_from,
+            effective_date_to,
+            last_login_date_time
+        from
+            system_account
+        where
+            login_id = #{loginId}
+    </select>
+
+    <select id="selectUsersByPrimaryKey" resultType="com.example.common.generated.model.Users">
+        select
+            user_id,
+            kanji_name,
+            kana_name,
+            pm_flag
+        from
+            users
+        where
+            user_id = #{userId}
+    </select>
+
+    <update id="updateSystemAccountSetLoginInfoByLoginId">
+        update
+            system_account
+        set
+            failed_count = 0,
+            last_login_date_time = #{lastLoginDateTime}
+        where
+            login_id = #{loginId}
+    </update>
+
+    <update id="updateSystemAccountIncrementFailedCountByLoginId">
+        update
+            system_account
+        set
+            failed_count = failed_count + 1
+        where
+            login_id = #{loginId}
+    </update>
+</mapper>

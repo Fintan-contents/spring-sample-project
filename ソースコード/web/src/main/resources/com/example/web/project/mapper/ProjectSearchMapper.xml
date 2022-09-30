@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.project.mapper.ProjectSearchMapper">
+    <sql id="criteria">
+        <where>
+            <if test="divisionId != null">
+                u.organization_id = #{divisionId}
+            </if>
+            <if test="organizationId != null">
+                and o.organization_id = #{organizationId}
+            </if>
+            <if test="projectTypes.length > 0">
+                and p.project_type in
+                <foreach item="projectType" collection="projectTypes"
+                         open="(" separator="," close=")">
+                    #{projectType}
+                </foreach>
+            </if>
+            <if test="projectClasses.length > 0">
+                and p.project_class in
+                <foreach collection="projectClasses" item="projectClass"
+                         open="(" separator="," close=")">
+                    #{projectClass}
+                </foreach>
+            </if>
+            <if test="salesFrom != null">
+            <![CDATA[
+                and p.sales >= #{salesFrom}
+            ]]>
+            </if>
+            <if test="salesTo != null">
+            <![CDATA[
+                and p.sales <= #{salesTo}
+            ]]>
+            </if>
+            <if test="projectStartDateFrom != null">
+            <![CDATA[
+                and p.project_start_date >= #{projectStartDateFrom}
+            ]]>
+            </if>
+            <if test="projectStartDateTo != null">
+            <![CDATA[
+                and p.project_start_date <= #{projectStartDateTo}
+            ]]>
+            </if>
+            <if test="projectEndDateFrom != null">
+            <![CDATA[
+                and p.project_end_date >= #{projectEndDateFrom}
+            ]]>
+            </if>
+            <if test="projectEndDateTo != null">
+            <![CDATA[
+                and p.project_end_date <= #{projectEndDateTo}
+            ]]>
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and p.project_name like '%' || #{projectName} || '%'
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectProjectByCriteria" resultType="com.example.web.project.model.search.ProjectView">
+        select
+            p.project_id,
+            p.project_name,
+            p.project_type,
+            p.project_class,
+            o.organization_name,
+            u.organization_name division_name,
+            p.project_manager,
+            p.sales,
+            p.project_start_date,
+            p.project_end_date
+        from
+            project p
+        left outer join
+            organization o
+        on
+            p.organization_id = o.organization_id
+        left outer join
+            organization u
+        on
+            o.upper_organization = u.organization_id
+        <include refid="criteria" />
+        order by
+            p.project_id
+        limit
+            #{pageable.pageSize}
+        offset
+            #{pageable.offset}
+    </select>
+
+    <select id="countProjectByCriteria" resultType="int">
+        select
+            count(*)
+        from
+            project p
+        left outer join
+            organization o
+        on
+            p.organization_id = o.organization_id
+        left outer join
+            organization u
+        on
+            o.upper_organization = u.organization_id
+        <include refid="criteria" />
+    </select>
+
+    <select id="selectAllDivision" resultType="Organization">
+        select
+            organization_id,
+            organization_name
+        from
+            organization
+        where
+            upper_organization is null
+        order by
+            organization_id
+    </select>
+
+    <select id="selectAllDepartment" resultType="Organization">
+        select
+            organization_id,
+            organization_name
+        from
+            organization
+        where
+            upper_organization is not null
+        order by
+            organization_id
+    </select>
+</mapper>

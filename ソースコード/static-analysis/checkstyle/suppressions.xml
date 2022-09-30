@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+		"-//Puppy Crawl//DTD Suppressions 1.1//EN"
+		"http://checkstyle.sourceforge.net/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+
+	<!-- MyBatis Generatorで自動生成されるファイルの警告を抑止する。-->
+	<suppress checks="(MissingJavadocType|MissingJavadocMethod)"
+			files="com[\\/]example[\\/]common[\\/]generated[\\/].*\.java"/>
+
+	<!-- Appクラスをインスタンス化して使用するケースが想定できないので抑止する。 -->
+	<suppress checks="HideUtilityClassConstructor"
+			files="com[\\/]example[\\/].*[\\/]App.java"/>
+
+	<!-- HttpSecurity#csrfのシグネチャが throws Exception となっており独自の型に詰め直す意味もないので抑止する。 -->
+	<suppress checks="IllegalThrows"
+			  files="com[\\/]example[\\/](api|web)[\\/]common[\\/]security[\\/]WebSecurityConfig.java"/>
+
+	<!-- バッチは例外ハンドリングのためメインクラスでExceptionをキャッチしてもよい。 -->
+	<suppress checks="IllegalCatch"
+			  files="com[\\/]example[\\/]batch[\\/]App.java"/>
+
+	<!--
+	 エラーハンドリングを目的として作成されたクラスであり、
+	 Throwableをスローするメソッド（org.aopalliance.intercept.Joinpoint#proceed）の
+	 エラーハンドリングを行う必要があるため抑止する。
+	 -->
+	<suppress checks="IllegalCatch"
+			  files="com[\\/]example[\\/]web[\\/]common[\\/]errorhandling[\\/]ExceptionHandlingInterceptor.java"/>
+</suppressions>

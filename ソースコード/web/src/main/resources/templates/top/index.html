@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, false)}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <script src="../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <title>トップ</title>
+  </head>
+
+  <body class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">全社のプロジェクトを収集</div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-4 fw-bold">プロジェクト管理</div>
+        <hr class="mt-0">
+        <span class="field">　┗　<a href="../project/search/index.html" th:href="@{project/search}">プロジェクト検索</a></span><br/>
+        <span sec:authorize-url="/project/create" class="field">　┗　<a href="../project/create/index.html" th:href="@{/project/create}">プロジェクト登録</a></span><br/>
+      </div>
+    </div>
+  </body>
+</html>

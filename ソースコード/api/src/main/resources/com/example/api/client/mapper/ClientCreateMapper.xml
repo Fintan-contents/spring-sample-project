@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.client.mapper.ClientCreateMapper">
+
+    <insert id="insertClient" keyColumn="client_id" keyProperty="clientId" useGeneratedKeys="true">
+        insert into
+            client
+            (
+            client_name,
+            industry_code,
+            version_no
+            )
+        values
+            (
+            #{clientName},
+            #{industryCode},
+            #{versionNo}
+            )
+    </insert>
+
+    <select id="countByClientName" parameterType="string" resultType="_long">
+        select
+            count(*)
+        from
+            client
+        where
+            client_name = #{clientName}
+    </select>
+
+</mapper>

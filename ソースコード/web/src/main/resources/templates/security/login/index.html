@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, false)}"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+  <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+  <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../static/js/common.js"></script>
+  <title>ログイン</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-start mb-4">
+      <div class="offset-md-1 col-md-4">
+        <div class="fs-2 fw-bold">ログイン</div>
+      </div>
+    </div>
+    <form class="row justify-content-start mb-4" th:action="@{/login}" action="../../top/index.html" method="POST"
+      autocomplete="off">
+      <div class="offset-md-1 col-md-4">
+        <div class="mb-3 text-danger fw-bold"
+          th:if="${#request.getParameter('error') != null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+          th:text="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></div>
+        <div class="mb-3">
+          <label for="loginId" class="form-label fw-bold">ログインID<span class="fw-6 text-danger">*</span></label>
+          <input type="text" class="form-control" id="loginId" name="loginId" placeholder="ログインID" maxlength="20" />
+        </div>
+        <div class="mb-3">
+          <label for="userPassword" class="form-label fw-bold">パスワード<span class="fw-6 text-danger">*</span></label>
+          <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="パスワード" maxlength="44"/>
+        </div>
+        <div class="container mb-3">
+          <div class="row justify-content-center">
+            <input class="btn btn-primary col-6" type="submit" value="ログイン" name="login" id="login" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

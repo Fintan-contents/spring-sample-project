@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.project.mapper.ProjectUpdateMapper">
+
+    <select id="selectProjectByPrimaryKey" resultType="com.example.web.project.model.update.ProjectView">
+        select
+            p.project_id,
+            p.project_name,
+            p.project_type,
+            p.project_class,
+            p.project_start_date,
+            p.project_end_date,
+            p.organization_id,
+            p.client_id,
+            p.project_manager,
+            p.project_leader,
+            p.note,
+            p.sales,
+            p.version_no,
+            o.upper_organization division_id
+        from
+            project p
+        inner join
+            organization o
+        on
+            p.organization_id = o.organization_id
+        where
+            p.project_id = #{projectId}
+    </select>
+
+    <update id="updateProjectByPrimaryKey">
+        update
+            project
+        set
+            project_name = #{projectName},
+            project_type = #{projectType},
+            project_class =    #{projectClass},
+            project_start_date = #{projectStartDate},
+            project_end_date = #{projectEndDate},
+            organization_id = #{organizationId},
+            client_id = #{clientId},
+            project_manager = #{projectManager},
+            project_leader = #{projectLeader},
+            note = #{note},
+            sales = #{sales},
+            version_no = #{versionNo} + 1
+        where
+            project_id = #{projectId}
+            and version_no = #{versionNo}
+    </update>
+
+    <select id="selectOrganizationNameByPrimaryKey" resultType="string">
+        select
+            organization_name
+        from
+            organization
+        where
+            organization_id = #{organizationId}
+    </select>
+
+    <select id="selectAllDivision" resultType="Organization">
+        select
+            organization_id,
+            organization_name
+        from
+            organization
+        where
+            upper_organization is null
+        order by
+            organization_id
+    </select>
+
+    <select id="selectAllDepartment" resultType="Organization">
+        select
+            organization_id,
+            organization_name
+        from
+            organization
+        where
+            upper_organization is not null
+        order by
+            organization_id
+    </select>
+
+</mapper>

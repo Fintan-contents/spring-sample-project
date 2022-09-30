@@ -1,0 +1,16 @@
+body {
+    font-size: 0.9rem;
+}
+
+td {
+    word-break: break-all;
+}
+
+th {
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+.form-check~.invalid-feedback {
+    display: block;
+}

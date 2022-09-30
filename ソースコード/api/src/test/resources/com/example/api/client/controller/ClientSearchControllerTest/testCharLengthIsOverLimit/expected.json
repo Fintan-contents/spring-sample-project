@@ -1,0 +1,6 @@
+{
+  "faultCode": "FB1999901",
+    "messages": [
+      "clientName:128文字以下の値を入力してください。"
+    ]
+}

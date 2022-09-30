@@ -1,0 +1,10 @@
+{
+  "clients": [
+    {
+      "clientId": 5,
+      "clientName": "テスト会社３（建設業）",
+      "industryCode": "02",
+      "versionNo": 1
+    }
+  ]
+}

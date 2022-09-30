@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>プロジェクト更新</title>
+  </head>
+
+  <body class="container">
+    <span th:if="${message}" th:text="${message}"></span>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">プロジェクト更新確認</div>
+      </div>
+    </div>
+    <form method="POST" th:action="@{/project/update/execute}" action="./complete.html" th:object="${projectUpdateForm}">
+      <span th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" class="text-danger fw-bold"></span>
+      <div class="row mb-3">
+        <div class="col-6">
+          <span class="form-label fw-bold">事業部/部門<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{@projectUpdateViewHelper.getOrganizationName(divisionId)}" class="form-control-plaintext">A事業部</span>
+        </div>
+        <div class="col-6">
+          <span class="form-label">&nbsp;</span>
+          <span th:text="*{@projectUpdateViewHelper.getOrganizationName(organizationId)}" class="form-control-plaintext">C部門</span>
+        </div>
+      </div>
+      <div class="col mb-3">
+        <span class="form-label fw-bold">PJ名<span class="fw-6 text-danger">*</span></span>
+        <span th:text="*{projectName}" class="form-control-plaintext">○○プロジェクト</span>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <span class="form-label fw-bold">PJ種別<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{@codeViewHelper.getName('C0300001',projectType)}" class="form-control-plaintext">新規開発PJ</span>
+        </div>
+        <div class="col-6">
+          <span class="form-label fw-bold">PJ分類<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{@codeViewHelper.getName('C0200001',projectClass)}" class="form-control-plaintext">SS</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <span class="form-label fw-bold">売上高</span>
+          <span th:text="*{#numbers.formatInteger(sales, 0, 'COMMA')}" class="form-control-plaintext">15,000</span>
+        </div>
+        <div class="col-6">
+          <span class="form-label fw-bold">顧客<span class="fw-6 text-danger">*</span></span>
+          <div class="input-group">
+            <span th:text="*{@projectUpdateViewHelper.getClientName(clientId)}" class="form-control-plaintext">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <span class="form-label fw-bold">PM<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{projectManager}" class="form-control-plaintext">プロジェクトマネージャ</span>
+        </div>
+        <div class="col-6">
+          <span class="form-label fw-bold">PL<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{projectLeader}" class="form-control-plaintext">プロジェクトリーダー</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <span class="form-label fw-bold">開始日<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{#temporals.format(projectStartDate, 'uuuu/MM/dd')}" class="form-control-plaintext">2022年1月1日</span>
+        </div>
+        <div class="col-6">
+          <span class="form-label fw-bold">終了日<span class="fw-6 text-danger">*</span></span>
+          <span th:text="*{#temporals.format(projectEndDate, 'uuuu/MM/dd')}" class="form-control-plaintext">2023年1月1日</span>
+        </div>
+      </div>
+      <div class="col mb-3">
+        <span class="form-label fw-bold">備考</span>
+        <span th:each="note : *{@projectUpdateViewHelper.splitByLineBreak(note)}" th:text="${note}" class="form-control-plaintext">備考欄</span>
+      </div>
+      <input type="hidden" th:field="*{projectId}" />
+      <input type="hidden" th:field="*{divisionId}" />
+      <input type="hidden" th:field="*{organizationId}" />
+      <input type="hidden" th:field="*{projectName}" />
+      <input type="hidden" th:field="*{projectType}" />
+      <input type="hidden" th:field="*{projectClass}" />
+      <input type="hidden" th:field="*{sales}" />
+      <input type="hidden" th:field="*{clientId}" />
+      <input type="hidden" th:field="*{projectManager}" />
+      <input type="hidden" th:field="*{projectLeader}" />
+      <input type="hidden" th:field="*{projectStartDate}" />
+      <input type="hidden" th:field="*{projectEndDate}" />
+      <input type="hidden" th:field="*{note}" />
+      <input type="hidden" th:field="*{versionNo}" />
+      <div class="row justify-content-center pt-4">
+        <div class="col-2">
+          <input class="btn btn-primary w-100" type="submit" name="back" value="戻る" />
+        </div>
+        <div class="col-2">
+          <input class="btn btn-primary w-100" type="submit" name="execute" value="更新" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

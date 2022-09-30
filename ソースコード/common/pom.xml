@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>sample-project-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<artifactId>sample-project-common</artifactId>
+
+	<properties>
+		<gsp.driver>org.postgresql.Driver</gsp.driver>
+		<gsp.url>jdbc:postgresql://localhost:5432/postgres</gsp.url>
+		<gsp.adminUser>postgres</gsp.adminUser>
+		<gsp.adminPassword>password</gsp.adminPassword>
+		<gsp.user>postgres</gsp.user>
+		<gsp.password>password</gsp.password>
+		<gsp.schema>public</gsp.schema>
+		<gsp.ddlDirectory>target/ddl</gsp.ddlDirectory>
+		<gsp.dataDirectory>src/test/data</gsp.dataDirectory>
+		<gsp.erdFile>src/main/resources/entity/data-model.edm</gsp.erdFile>
+		<gsp.extraDdlDirectory>src/main/ddl</gsp.extraDdlDirectory>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Nablarch：ドメインバリデーション -->
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-core-validation-ee</artifactId>
+		</dependency>
+		<!-- Nablarch：文字種設定をNablarchデフォルト設定から読み込む -->
+		<dependency>
+			<groupId>com.nablarch.configuration</groupId>
+			<artifactId>nablarch-main-default-configuration</artifactId>
+		</dependency>
+		<!-- Nablarch：コード管理 -->
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-common-code</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-common-code-jdbc</artifactId>
+		</dependency>
+		<!-- Nablarch：日付管理 -->
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-common-jdbc</artifactId>
+		</dependency>
+		<!-- Nablarch：メール送信 -->
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-mail-sender</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-common-idgenerator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.nablarch.framework</groupId>
+			<artifactId>nablarch-common-idgenerator-jdbc</artifactId>
+		</dependency>
+		<!-- Nablarch：ログをSLF4Jへ流す -->
+		<dependency>
+			<groupId>com.nablarch.integration</groupId>
+			<artifactId>nablarch-slf4j-adaptor</artifactId>
+		</dependency>
+
+		<!-- JDBCドライバ -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- テスト用 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<configuration>
+					<includeAllDependencies>true</includeAllDependencies>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<!-- 自動生成されるModelは除外する -->
+						<exclude>com/example/common/generated/**</exclude>
+						<!-- DomainBeanはインスタンス化しないため除外する -->
+						<exclude>com/example/common/nablarch/validation/DomainBean.class</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>gsp</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>jp.co.tis.gsp</groupId>
+						<artifactId>gsp-dba-maven-plugin</artifactId>
+						<configuration>
+							<driver>${gsp.driver}</driver>
+							<url>${gsp.url}</url>
+							<adminUser>${gsp.adminUser}</adminUser>
+							<adminPassword>${gsp.adminPassword}</adminPassword>
+							<user>${gsp.user}</user>
+							<password>${gsp.password}</password>
+							<schema>${gsp.schema}</schema>
+							<ddlDirectory>${gsp.ddlDirectory}</ddlDirectory>
+							<dataDirectory>${gsp.dataDirectory}</dataDirectory>
+							<rootPackage>unused</rootPackage>
+							<erdFile>${gsp.erdFile}</erdFile>
+							<extraDdlDirectory>${gsp.extraDdlDirectory}</extraDdlDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>default-cli</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>generate-ddl</goal>
+									<goal>execute-ddl</goal>
+									<goal>load-data</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

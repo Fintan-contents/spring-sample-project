@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>プロジェクト詳細</title>
+  </head>
+
+  <body class="container">
+    <span th:if="${message}" th:text="${message}"></span>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">プロジェクト詳細</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <span class="form-label fw-bold">事業部/部門</span>
+        <span th:text="${projectDto.divisionName}" class="form-control-plaintext">A事業部</span>
+      </div>
+      <div class="col-6">
+        <span class="form-label">&nbsp;</span>
+        <span th:text="${projectDto.organizationName}" class="form-control-plaintext">C部門</span>
+      </div>
+    </div>
+    <div class="col mb-3">
+      <span class="form-label fw-bold">PJ名</span>
+      <span th:text="${projectDto.projectName}" class="form-control-plaintext">○○プロジェクト</span>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <span class="form-label fw-bold">PJ種別</span>
+        <span th:text="${@codeViewHelper.getName('C0300001',projectDto.projectType)}" class="form-control-plaintext">新規開発PJ</span>
+      </div>
+      <div class="col-6">
+        <span class="form-label fw-bold">PJ分類</span>
+        <span th:text="${@codeViewHelper.getName('C0200001',projectDto.projectClass)}" class="form-control-plaintext">SS</span>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <span class="form-label fw-bold">売上高(千円)</span>
+        <span th:text="${#numbers.formatInteger(projectDto.sales, 0, 'COMMA')}" class="form-control-plaintext">15,000</span>
+      </div>
+      <div class="col-6">
+        <span class="form-label fw-bold">顧客</span>
+        <div class="input-group">
+          <span th:text="${@projectDetailViewHelper.getClientName(projectDto.clientId)}" class="form-control-plaintext">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <span class="form-label fw-bold">PM</span>
+        <span th:text="${projectDto.projectManager}" class="form-control-plaintext">プロジェクトマネージャ</span>
+      </div>
+      <div class="col-6">
+        <span class="form-label fw-bold">PL</span>
+        <span th:text="${projectDto.projectLeader}" class="form-control-plaintext">プロジェクトリーダー</span>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <span class="form-label fw-bold">開始日</span>
+        <span th:text="${#temporals.format(projectDto.projectStartDate, 'uuuu/MM/dd')}" class="form-control-plaintext">2022年1月1日</span>
+      </div>
+      <div class="col-6">
+        <span class="form-label fw-bold">終了日</span>
+        <span th:text="${#temporals.format(projectDto.projectEndDate, 'uuuu/MM/dd')}" class="form-control-plaintext">2023年1月1日</span>
+      </div>
+    </div>
+    <div class="col mb-3">
+      <span class="form-label fw-bold">備考</span>
+      <span th:each="note : ${@projectDetailViewHelper.splitByLineBreak(projectDto.note)}" th:text="${note}" class="form-control-plaintext">備考欄</span>
+    </div>
+    <div class="row justify-content-center pt-4">
+      <div class="col-2">
+        <!--/* 検索結果画面に戻る */-->
+        <a th:href="@{/project/search/search}" class="btn btn-primary w-100" href="../search/index.html">戻る</a>
+      </div>
+      <div class="col-2">
+        <a
+          sec:authorize-url="/project/update"
+          th:href="@{/project/update/(projectId=${projectDto.projectId})}"
+          class="btn btn-primary w-100"
+          href="../update/index.html"
+          >更新</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

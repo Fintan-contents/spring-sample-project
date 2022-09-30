@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.project.mapper.ProjectDetailMapper">
+
+    <select id="selectProjectByPrimaryKey" resultType="com.example.web.project.model.detail.ProjectView">
+        select
+            p.project_id,
+            p.project_name,
+            p.project_type,
+            p.project_class,
+            p.project_start_date,
+            p.project_end_date,
+            p.organization_id,
+            p.client_id,
+            p.project_manager,
+            p.project_leader,
+            p.note,
+            p.sales,
+            p.version_no,
+            o.organization_name,
+            u.organization_name division_name
+        from
+            project p
+        inner join
+            organization o
+        on
+            p.organization_id = o.organization_id
+        inner join
+            organization u
+        on
+            o.upper_organization = u.organization_id
+        where
+            p.project_id = #{projectId}
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+{
+  "clients": [
+    {
+      "clientId": 1,
+      "clientName": "テスト会社１（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    },
+    {
+      "clientId": 2,
+      "clientName": "テスト会社２（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    },
+    {
+      "clientId": 4,
+      "clientName": "テスト会社３（農業）",
+      "industryCode": "01",
+      "versionNo": 1
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+<FindBugsFilter>
+
+	<!-- 自動生成クラスをチェック対象外にする指定 -->
+	<Match>
+		<Package name="com.example.common.generated.model"/>
+	</Match>
+
+	<!-- Nablarch実装を踏襲するため除外 -->
+	<Match>
+		<Bug pattern="SS_SHOULD_BE_STATIC" />
+		<Class name="com.example.common.nablarch.db.UnmanagedSimpleDbTransactionManager"/>
+	</Match>
+
+	<!-- ミュータブルなオブジェクトを許容する -->
+	<Match>
+		<Or>
+			<Bug pattern="EI_EXPOSE_REP"/>
+			<Bug pattern="EI_EXPOSE_REP2"/>
+		</Or>
+	</Match>
+
+	<!-- APIではCSRF対策を無効にする -->
+	<Match>
+		<Bug pattern="SPRING_CSRF_PROTECTION_DISABLED"/>
+		<Class name="com.example.api.common.security.WebSecurityConfig"/>
+	</Match>
+	<Match>
+		<Bug pattern="SPRING_CSRF_UNRESTRICTED_REQUEST_MAPPING"/>
+		<Class name="com.example.api.common.error.DefaultErrorController"/>
+	</Match>
+
+	<!-- OnRejectErrorの取得箇所。アノテーションを元にAOPするため実際にはnullになり得ないため除外 -->
+	<Match>
+		<Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"/>
+		<Class name="com.example.web.common.errorhandling.ExceptionHandlingInterceptor"/>
+		<Method name="invoke" params="org.aopalliance.intercept.MethodInvocation" returns="java.lang.Object"/>
+	</Match>
+
+	<!-- 自動生成されたModelを継承した場合にequalsとhashCodeはoverrideしなくて良いこととする -->
+	<Match>
+		<Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+		<Class name="~com\.example\.(api|batch|web)\.[^.]+.model\..+"/>
+	</Match>
+
+</FindBugsFilter>
+
