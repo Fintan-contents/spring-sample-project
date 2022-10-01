@@ -14,6 +14,8 @@ NablarchのライブラリをSpring Bootで使用するための設定も格納�
 mvn -P gsp generate-resources
 ```
 
+上記のコマンドはデータベースの内容を洗い替えるため、動作確認をしたり自動テストを行なうことでデータが変更された場合にデータベースをリセットするためにもご使用ください。
+
 ## MyBatisで使用するModelを自動生成する
 
 [MyBatis Generator](https://mybatis.org/generator/)を使用してテーブルに対応するModelを自動生成します。
@@ -21,6 +23,9 @@ mvn -P gsp generate-resources
 ```bash
 mvn mybatis-generator:generate
 ```
+
+Modelは`src/main/java/com/example/common/generated/model`以下に出力され、すでにファイルが存在する場合は上書きされます。
+生成されたModelを削除したい場合は、手動で削除してください。
 
 なお、MyBatis GeneratorはMapperインターフェースも生成できますが、生成される`UPDATE`文が楽観排他制御に対応しておらず誤って使用することを避けるため、本プロジェクトではModelのみを生成対象としています。
 

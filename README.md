@@ -19,7 +19,7 @@
 
       上記以外は本リポジトリに格納されたファイルをご活用ください。
 
-- [ソースコード](./ソースコード)
+- [sourcecode](./sourcecode)
     - サンプルプロジェクトのソースコードです。
 
       [Nablarch版のソースコード](https://github.com/Fintan-contents/nablarch-system-development-guide/tree/master/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89)は「プロジェクト管理システム」と「顧客管理システム」が完全に分かれていますが、Spring Framework版ではまとめて配置しています。

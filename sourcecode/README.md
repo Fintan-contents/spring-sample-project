@@ -2,7 +2,7 @@
 
 ## 概要
 
-[Spring Boot](https://spring.pleiades.io/spring-boot/docs/2.7.x/reference/html/)をベースにしたサンプルコードです。
+[Spring Boot](https://spring.io/projects/spring-boot)をベースにしたサンプルコードです。
 
 ドメインバリデーションやコード管理、業務日付管理を行うため一部で[Nablarch](https://nablarch.github.io/docs/5u21/doc/)のライブラリを組み込んで使用しています。
 これらの機能はゼロから作るのではなく、Nablarchが提供している高品質な成果物を再利用することにしました。

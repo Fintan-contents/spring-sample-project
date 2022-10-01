@@ -40,6 +40,8 @@ Spring Boot Maven Pluginを使用してコンテナイメージを生成しま�
 mvn spring-boot:build-image -DskipTests
 ```
 
+※プロキシ環境下では[imageパラメータ](https://docs.spring.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#goals-build-image-parameters-details-image)の`env`でプロキシの設定(`HTTP_PROXY`、`HTTPS_PROXY`)を行う必要があります。
+
 プラグインの詳細は次のウェブサイトを参照してください。
 
 - https://docs.spring.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#build-image
