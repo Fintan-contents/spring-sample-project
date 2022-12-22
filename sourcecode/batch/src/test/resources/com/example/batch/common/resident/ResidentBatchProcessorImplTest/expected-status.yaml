@@ -1,0 +1,11 @@
+test_requests:
+  - id: 1
+    status: "CC"
+    requested_at: 2022-11-02 10:00:00
+  - id: 2
+    status: "DD"
+    requested_at: 2022-11-02 10:00:01
+
+resident_batch_state:
+  - job_id: BX0000000
+    running: true

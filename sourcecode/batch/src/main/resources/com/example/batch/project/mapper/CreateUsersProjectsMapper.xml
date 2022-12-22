@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.project.mapper.CreateUsersProjectsMapper">
+    <select id="selectProjectsByRequestId" resultType="com.example.common.generated.model.Project">
+        select
+            project.project_id,
+            project.project_name,
+            project.project_type,
+            project.project_class,
+            project.project_start_date,
+            project.project_end_date,
+            project.organization_id,
+            project.client_id,
+            project.project_manager,
+            project.project_leader,
+            project.note,
+            project.sales,
+            project.version_no
+        from
+            project
+        inner join
+            project_user
+        on
+            project.project_id = project_user.project_id
+        inner join
+            projects_by_user_request
+        on
+            project_user.user_id = projects_by_user_request.user_id
+        where
+            projects_by_user_request.id = #{requestId}
+        order by
+            project.project_start_date,
+            project.project_end_date,
+            project.project_name
+    </select>
+
+    <update id="updateProjectsByUserSetOutputFileInformationByRequestId">
+        update
+            projects_by_user
+        set
+            file_name = #{fileName},
+            create_datetime = #{createDatetime},
+            expire_datetime = #{expireDatetime}
+        where
+            request_id = #{requestId}
+    </update>
+</mapper>

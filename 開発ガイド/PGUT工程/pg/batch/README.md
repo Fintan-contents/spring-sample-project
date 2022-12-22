@@ -17,3 +17,5 @@
 - [日付・時刻](./date-and-time.md)
 - [HTTPクライアント](./http-client.md)
 - [メール送信](./send-mail.md)
+- [常駐バッチの実装方法](./resident-batch.md)
+- [バッチ処理の前後で処理を行う](./step-execution-listener.md)

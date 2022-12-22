@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.project.mapper.ProjectDownloadMapper">
+
+    <select id="selectProjectsByUserByLoginId" resultType="com.example.web.project.model.download.ProjectsByUserView">
+        select
+            pbur.status,
+            pbur.request_datetime,
+            pbu.user_id,
+            pbu.create_datetime,
+            pbu.expire_datetime,
+            pbu.file_name
+        from
+            projects_by_user pbu
+        inner join
+            system_account sa
+        on
+            pbu.user_id = sa.user_id
+        left outer join
+            projects_by_user_request pbur
+        on
+            pbur.id = pbu.request_id
+        where
+            sa.login_id = #{loginId}
+    </select>
+
+    <insert id="insertProjectsByUserRequest" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into
+            projects_by_user_request
+            (
+            status,
+            request_datetime,
+            user_id
+            )
+        values
+            (
+            #{status},
+            #{requestDatetime},
+            #{userId}
+            )
+    </insert>
+
+    <update id="updateProjectsByUser">
+        update
+            projects_by_user
+        set
+            request_id      = #{requestId},
+            file_name       = #{fileName},
+            create_datetime = null,
+            expire_datetime = null
+        where
+            user_id = #{userId}
+    </update>
+</mapper>

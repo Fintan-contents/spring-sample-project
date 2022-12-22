@@ -28,4 +28,12 @@
 	 -->
 	<suppress checks="IllegalCatch"
 			  files="com[\\/]example[\\/]web[\\/]common[\\/]errorhandling[\\/]ExceptionHandlingInterceptor.java"/>
+
+	<!-- 単にsetterを定義しているだけなため抑止する。 -->
+	<suppress checks="HiddenField"
+			  files="com[\\/]example[\\/]batch[\\/]common[\\/]resident[\\/]ResidentBatchScheduler.java"/>
+
+	<!-- Spring Batchのジョブ実行時に発生した例外をハンドリングするためThrowsのcatchが必要となる -->
+	<suppress checks="IllegalCatch"
+			  files="com[\\/]example[\\/]batch[\\/]common[\\/]resident[\\/]ResidentBatchProcessorImpl.java"/>
 </suppressions>

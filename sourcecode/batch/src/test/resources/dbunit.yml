@@ -1,2 +1,7 @@
 properties:
   caseSensitiveTableNames: true
+  replacers:
+    - !!com.github.database.rider.core.replacers.DateTimeReplacer {}
+    - !!com.github.database.rider.core.replacers.UnixTimestampReplacer {}
+    - !!com.github.database.rider.core.replacers.NullReplacer {}
+    - !!com.example.batch.test.SystemDateTextReplacer {}

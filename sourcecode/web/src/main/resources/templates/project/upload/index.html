@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>プロジェクトアップロード</title>
+  </head>
+
+  <body class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">プロジェクトアップロード</div>
+      </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data" th:action="@{/project/upload/confirm}" action="./confirm.html" th:object="${projectUploadForm}">
+      <span th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" class="text-danger fw-bold"></span>
+      <div class="row mb-4">
+        <div class="col-4">
+          <span class="form-label fw-bold">ファイル<span class="fw-6 text-danger">*</span></span>
+          <input type="file" th:field="*{file}" class="form-control" th:errorclass="is-invalid">
+          <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}" class="invalid-feedback"></span>
+        </div>
+      </div>
+      <div class="row justify-content-center pt-4">
+        <div class="col-4">
+          <input class="btn btn-primary w-100" type="submit" value="アップロード" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

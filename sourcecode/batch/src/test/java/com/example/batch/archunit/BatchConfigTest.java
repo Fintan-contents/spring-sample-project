@@ -19,7 +19,7 @@ public class BatchConfigTest {
     void testBatchConfigSuperClass() {
         classes()
                 .that().resideInAPackage("..configuration")
-                .and().resideOutsideOfPackage("..common.configuration") // common配下は除外
+                .and().resideOutsideOfPackage("..common..") // common配下は除外
                 .and().haveSimpleNameEndingWith("Config")
                 .should().beAssignableTo(BatchBaseConfig.class)
                 .check(appJavaClasses);

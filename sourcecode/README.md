@@ -47,3 +47,11 @@ docker compose up -d
 - [Web](./web/README.md)
 - [API](./api/README.md)
 - [バッチ](./batch/README.md)
+
+## 参考情報
+
+このサンプルでは次に示す[Springアプリ開発ノウハウ集](https://fintan-contents.github.io/spring-crib-notes/latest/html/index.html)のノウハウを使用しています。
+
+- [二重送信防止](https://fintan-contents.github.io/spring-crib-notes/latest/html/web/double-submission/index.html)
+- [SpringからNablarchの機能を利用する際のノウハウ](https://fintan-contents.github.io/spring-crib-notes/latest/html/nablarch/index.html)
+ 

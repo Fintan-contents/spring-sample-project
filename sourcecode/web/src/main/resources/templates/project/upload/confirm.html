@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>プロジェクトアップロード</title>
+  </head>
+
+  <body class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">プロジェクトアップロード確認</div>
+      </div>
+    </div>
+    <form method="POST" th:action="@{/project/upload/execute}" action="./complete.html" th:object="${projectUploadForm}">
+      <div class="row justify-content-center pt-4">
+      	<div class="col-12 text-center">
+      	  アップロードしたファイルをもとにプロジェクトの一括登録を要求しますか？
+        </div>
+      </div>
+      <div class="row justify-content-center pt-4">
+        <div class="col-2">
+          <input class="btn btn-primary w-100" type="submit" name="back" value="戻る" />
+        </div>
+        <div class="col-2">
+          <input type="hidden" th:field="*{tempFileId}" />
+          <input class="btn btn-primary w-100" type="submit" name="execute" value="一括登録要求" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

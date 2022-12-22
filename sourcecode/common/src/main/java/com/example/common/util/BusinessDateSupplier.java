@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import nablarch.core.date.BusinessDateProvider;
 
@@ -37,7 +36,6 @@ public class BusinessDateSupplier {
      * </p>
      * @return 業務日付
      */
-    @Transactional(readOnly = true) // バッチから使用したときにコネクションが解放されないため設定している
     public LocalDate getDate() {
         /*
          * ■Nablarch が提供する業務日付を上書きする機能を利用しない理由

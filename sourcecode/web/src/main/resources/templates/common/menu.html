@@ -18,18 +18,24 @@
         </div>
         <div class="card-body">
           <div>
-            <a th:href="@{/project/search}" class="link-secondary text-decoration-none" href="../project/search/index.html"
-              >プロジェクト検索</a
-            >
+            <a th:href="@{/project/search}" class="link-secondary text-decoration-none" href="../project/search/index.html">
+              プロジェクト検索
+            </a>
+          </div>
+          <div sec:authorize-url="/project/create">
+            <a th:href="@{/project/create}" class="link-secondary text-decoration-none" href="../project/create/index.html">
+              プロジェクト登録
+            </a>
           </div>
           <div>
-            <a
-              sec:authorize-url="/project/create"
-              th:href="@{/project/create}"
-              class="link-secondary text-decoration-none"
-              href="../project/create/index.html"
-              >プロジェクト登録</a
-            >
+            <a th:href="@{/project/download}" class="link-secondary text-decoration-none" href="../project/download/index.html">
+              ユーザ別従事プロジェクト
+            </a>
+          </div>
+          <div sec:authorize-url="/project/upload">
+            <a th:href="@{/project/upload}" class="link-secondary text-decoration-none" href="../project/upload/index.html">
+              プロジェクトアップロード
+            </a>
           </div>
         </div>
       </div>

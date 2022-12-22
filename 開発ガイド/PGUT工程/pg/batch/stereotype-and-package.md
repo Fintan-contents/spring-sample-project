@@ -10,17 +10,18 @@
 
 ステレオタイプの一覧を以下に示す。
 
-| ステレオタイプ | Spring管理[^1] | ロジック     | 状態 | トランザクション管理 | 命名規約（接尾辞） | パッケージ                             |
-|----------------|----------------|--------------|------|----------------------|--------------------|--------------------------------------|
-| Config         | 対象           | 無           | 無   | 無                   | Config             | <ドメイン>.<機能>.configuration       |
-| Properties     | 対象           | 無           | 有   | 無                   | Properties         | <ドメイン>.<機能>.configuration       |
-| ItemReader     | 対象           | 有           | 有   | 有                   | ItemReader         | <ドメイン>.<機能>.reader              |
-| ItemProcessor  | 対象           | 有           | 有   | 有                   | ItemProcessor      | <ドメイン>.<機能>.processor           |
-| ItemWriter     | 対象           | 有           | 有   | 有                   | ItemWriter         | <ドメイン>.<機能>.writer              |
-| Tasklet        | 対象           | 有           | 無   | 有                   | Tasklet            | <ドメイン>.<機能>.tasklet             |
-| Item           | 対象外         | 無           | 有   | 無                   | Item               | <ドメイン>.<機能>.item                |
-| Mapper         | 対象           | 有           | 無   | 無                   | Mapper             | <ドメイン>.<機能>.mapper              |
-| Model          | 対象外         | 無           | 有   | 無                   | -                  | <ドメイン>.<機能>.model.<バッチ処理>  |
+| ステレオタイプ        | Spring管理[^1] | ロジック     | 状態 | トランザクション管理 | 命名規約（接尾辞）    | パッケージ                            |
+|-----------------------|----------------|--------------|------|----------------------|-----------------------|---------------------------------------|
+| Config                | 対象           | 無           | 無   | 無                   | Config                | <ドメイン>.<機能>.configuration       |
+| Properties            | 対象           | 無           | 有   | 無                   | Properties            | <ドメイン>.<機能>.configuration       |
+| ItemReader            | 対象           | 有           | 有   | 有                   | ItemReader            | <ドメイン>.<機能>.reader              |
+| ItemProcessor         | 対象           | 有           | 有   | 有                   | ItemProcessor         | <ドメイン>.<機能>.processor           |
+| ItemWriter            | 対象           | 有           | 有   | 有                   | ItemWriter            | <ドメイン>.<機能>.writer              |
+| Tasklet               | 対象           | 有           | 無   | 有                   | Tasklet               | <ドメイン>.<機能>.tasklet             |
+| StepExecutionListener | 対象           | 有           | 無   | 有                   | StepExecutionListener | <ドメイン>.<機能>.listener            |
+| Item                  | 対象外         | 無           | 有   | 無                   | Item                  | <ドメイン>.<機能>.item                |
+| Mapper                | 対象           | 有           | 無   | 無                   | Mapper                | <ドメイン>.<機能>.mapper              |
+| Model                 | 対象外         | 無           | 有   | 無                   | -                     | <ドメイン>.<機能>.model.<バッチ処理>  |
 
 [^1]: この表での「Spring管理」とは、Springにコンポーネントとして登録する、またはSpringの処理内でインスタンス生成されるものを指している。
 

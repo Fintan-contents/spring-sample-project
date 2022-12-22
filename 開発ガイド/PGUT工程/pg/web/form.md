@@ -63,6 +63,7 @@ public class ProjectCreateForm { // (1)
 |`LocalDateTime`|日時|日時|
 |`boolean`|真偽値|チェックボックスの状態を受け取る（チェックされていれば`true`となる）|
 |`String[]`|文字列の配列|グループ化されたチェックボックスで複数の値を受け取る|
+|`MultipartFile`|マルチパートファイル|アップロードされたファイルを受け取る|
 
 これらのうち`LocalDate`、`LocalTime`、`LocalDateTime`は`@DateTimeFormat`で値のフォーマットを指定すること。
 

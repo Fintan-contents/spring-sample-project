@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * 顧客検索の設定
  */
 @Configuration
-@PropertySource("classpath:/properties/Client/ClientSearch.properties")
+@PropertySource(value = "classpath:/properties/Client/ClientSearch.properties", encoding = "UTF-8")
 public class ClientSearchConfig {
 
     /**

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.client.mapper.ClientUpdateMapper">
+
+    <select id="selectClientByPrimaryKey" resultType="Client">
+        select
+            client_id,
+            client_name,
+            industry_code,
+            version_no
+        from
+            client
+        where
+            client_id = #{clientId}
+    </select>
+
+    <update id="updateClientByPrimaryKey">
+        update
+            client
+        set
+            client_name = #{clientName},
+            industry_code = #{industryCode},
+            version_no = #{versionNo} + 1
+        where
+            client_id = #{clientId}
+            and version_no = #{versionNo}
+    </update>
+
+    <select id="countByClientName" parameterType="string" resultType="_long">
+        select
+            count(*)
+        from
+            client
+        where
+            client_name = #{clientName}
+    </select>
+
+</mapper>

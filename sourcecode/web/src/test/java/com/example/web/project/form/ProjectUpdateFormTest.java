@@ -154,7 +154,7 @@ public class ProjectUpdateFormTest extends ValidationTestBase {
      */
     @Test
     @WithMockUser(authorities = "PROJECT_MANAGER")
-    void testConfirmDenyedCharacters() throws Exception {
+    void testConfirmDeniedCharacters() throws Exception {
         MvcResult mvcResult = mvc
                 .perform(post(CONFIRM_PATH)
                         .param("projectId", "X")
@@ -465,7 +465,7 @@ public class ProjectUpdateFormTest extends ValidationTestBase {
      */
     @Test
     @WithMockUser(authorities = "PROJECT_MANAGER")
-    void testExecuteDenyedCharacters() throws Exception {
+    void testExecuteDeniedCharacters() throws Exception {
         MvcResult mvcResult = mvc
                 .perform(post(EXECUTE_PATH)
                         .param("projectId", "X")

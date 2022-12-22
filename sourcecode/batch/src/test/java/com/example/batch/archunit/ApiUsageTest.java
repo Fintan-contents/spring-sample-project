@@ -1,19 +1,31 @@
 package com.example.batch.archunit;
 
+import static com.example.batch.archunit.ArchUnitConfiguration.*;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
+import static org.junit.jupiter.params.provider.Arguments.*;
+
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Stack;
+import java.util.StringTokenizer;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.core.task.TaskExecutor;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Stream;
-
-import static com.example.batch.archunit.ArchUnitConfiguration.appJavaClasses;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import com.example.batch.common.resident.ResidentBatchScheduler;
 
 /**
  * API使用が適切であることをチェックするテストクラス。
@@ -56,6 +68,7 @@ public class ApiUsageTest {
     @Test
     void testNoAsyncProcessing() {
         noClasses()
+                .that().doNotBelongToAnyOf(ResidentBatchScheduler.class)
                 .should().dependOnClassesThat().belongToAnyOf(
                         Executors.class,
                         ExecutorService.class,

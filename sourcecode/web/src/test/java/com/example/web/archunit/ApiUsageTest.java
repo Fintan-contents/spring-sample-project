@@ -28,6 +28,8 @@ import org.springframework.core.task.TaskExecutor;
 
 import com.example.web.common.errorhandling.ErrorViewResolverImpl;
 import com.example.web.common.errorhandling.ExceptionHandlingInterceptor;
+import com.example.web.common.mvc.CsvFileDownloadView;
+import com.example.web.common.upload.UploadSupport;
 
 /**
  * API使用が適切であることをチェックするテストクラス。
@@ -66,7 +68,7 @@ public class ApiUsageTest {
     @Test
     void testNoServletAPI() {
         noClasses()
-                .that(notType(ErrorViewResolverImpl.class))
+                .that(notType(ErrorViewResolverImpl.class, CsvFileDownloadView.class, UploadSupport.class))
                 .should().accessClassesThat().resideInAnyPackage("javax.servlet..")
                 .because("Servlet APIではなくSpring Web MVCのAPIを使用してください。")
                 .check(appJavaClasses);
@@ -116,14 +118,15 @@ public class ApiUsageTest {
      * @return チェック対象となるレガシーAPIとその代替手段の組み合わせ
      */
     static Stream<Arguments> legacyApiSource() {
-        return Stream.of(
-                arguments(StringBuffer.class, StringBuilder.class),
-                arguments(Dictionary.class, Map.class),
-                arguments(Enumeration.class, Iterator.class),
-                arguments(Hashtable.class, HashMap.class),
-                arguments(Stack.class, Deque.class),
-                arguments(StringTokenizer.class, "Stringのsplitメソッドまたはjava.util.regexパッケージのAPI"),
-                arguments(Vector.class, ArrayList.class));
+        return Stream
+                .of(
+                        arguments(StringBuffer.class, StringBuilder.class),
+                        arguments(Dictionary.class, Map.class),
+                        arguments(Enumeration.class, Iterator.class),
+                        arguments(Hashtable.class, HashMap.class),
+                        arguments(Stack.class, Deque.class),
+                        arguments(StringTokenizer.class, "Stringのsplitメソッドまたはjava.util.regexパッケージのAPI"),
+                        arguments(Vector.class, ArrayList.class));
     }
 
 }

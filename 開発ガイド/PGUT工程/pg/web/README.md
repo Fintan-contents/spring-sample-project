@@ -16,6 +16,8 @@
 - [メッセージ管理](./message-management.md)
 - [コード管理](./code-management.md)
 - [日付・時刻](./date-and-time.md)
+- [ファイルダウンロード](./file-download.md)
+- [ファイルアップロード](./file-upload.md)
 - [二重サブミット防止](./double-submission-protection.md)
 - [非同期通信（Ajax）](./async-http.md)
 - [メール送信](./send-mail.md)

@@ -50,8 +50,8 @@ public class WebSecurityConfig {
                         .mvcMatchers("/css/**", "/js/**").permitAll()
                         // ヘルスチェックのエンドポイントは認証しない
                         .mvcMatchers("/actuator/health").permitAll()
-                        // プロジェクト登録画面とプロジェクト更新画面はプロマネしか見られない
-                        .mvcMatchers("/project/create/**", "/project/update/**").hasAuthority("PROJECT_MANAGER")
+                        // プロジェクト登録画面とプロジェクト更新画面、プロジェクトアップロード画面はプロマネしか見られない
+                        .mvcMatchers("/project/create/**", "/project/update/**", "/project/upload/**").hasAuthority("PROJECT_MANAGER")
                         // 上記以外の画面は認証が必要
                         .anyRequest().authenticated())
 

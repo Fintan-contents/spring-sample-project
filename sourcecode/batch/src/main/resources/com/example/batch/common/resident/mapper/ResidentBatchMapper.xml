@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.common.resident.mapper.ResidentBatchMapper">
+
+    <select id="selectRequestForValidation" resultType="map">
+        select
+            ${request.primaryKeyName},
+            ${request.statusColumnName}
+        from
+            ${request.tableName}
+        limit
+            1
+    </select>
+
+    <select id="selectRequestPrimaryKeyByStatus" resultType="long">
+        select
+            ${request.primaryKeyName}
+        from
+            ${request.tableName}
+        where
+            ${request.statusColumnName} = #{status}
+        order by
+            ${request.requestedAtColumnName} asc,
+            ${request.primaryKeyName} asc
+        limit
+            #{request.limit}
+    </select>
+
+    <select id="selectRequestStringPrimaryKeyByStatus" resultType="string">
+        select
+            ${request.primaryKeyName}
+        from
+            ${request.tableName}
+        where
+            ${request.statusColumnName} = #{status}
+        order by
+            ${request.requestedAtColumnName} asc,
+            ${request.primaryKeyName} asc
+        limit
+            #{request.limit}
+    </select>
+
+    <update id="updateRequestStatusByPrimaryKey">
+        update
+            ${request.tableName}
+        set
+            ${request.statusColumnName} = #{status}
+        where
+            ${request.primaryKeyName} = #{primaryKey}
+    </update>
+
+    <select id="selectResidentBatchStateRunningByPrimaryKey" resultType="_boolean">
+        select
+            running
+        from
+            resident_batch_state
+        where
+            job_id = #{jobId}
+    </select>
+
+    <update id="updateResidentBatchStateRunningByPrimaryKey">
+        update
+            resident_batch_state
+        set
+            running = #{running}
+        where
+            job_id = #{jobId}
+    </update>
+
+</mapper>

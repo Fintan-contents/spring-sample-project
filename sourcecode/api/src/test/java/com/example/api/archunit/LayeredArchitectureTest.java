@@ -22,6 +22,7 @@ public class LayeredArchitectureTest {
      */
     private Architectures.LayeredArchitecture layeredArchitecture = Architectures
             .layeredArchitecture()
+            .consideringAllDependencies()
             .layer("Properties").definedBy("..configuration")
             .layer("Controller").definedBy("..controller")
             .layer("Service").definedBy("..service")

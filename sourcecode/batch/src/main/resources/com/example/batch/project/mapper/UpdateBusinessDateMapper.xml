@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.project.mapper.UpdateBusinessDateMapper">
+    <select id="selectBusinessDateByPrimaryKeyForUpdate"
+            resultType="com.example.common.generated.model.BusinessDate">
+        select
+            segment_id,
+            biz_date
+        from
+            business_date
+        where
+            segment_id = #{segmentId}
+        for update
+    </select>
+
+    <update id="updateBusinessDateByPrimaryKey">
+        update
+            business_date
+        set
+            biz_date = #{bizDate}
+        where
+            segment_id = #{segmentId}
+    </update>
+</mapper>

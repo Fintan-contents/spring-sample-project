@@ -72,7 +72,7 @@ public class ProjectCreateForm {
      * 顧客ID
      */
     @Required
-    @Domain("id")
+    @Domain("clientId")
     private Integer clientId;
 
     /**

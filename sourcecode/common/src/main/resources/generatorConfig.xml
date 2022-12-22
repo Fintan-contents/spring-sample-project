@@ -36,5 +36,10 @@
 		<table tableName="users">
 			<generatedKey column="user_id" sqlStatement="JDBC" />
 		</table>
+		<table tableName="business_date" />
+		<table tableName="projects_by_user_request">
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="projects_by_user"/>
 	</context>
 </generatorConfiguration>

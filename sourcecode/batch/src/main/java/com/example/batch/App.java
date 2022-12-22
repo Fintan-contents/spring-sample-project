@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.common.EnableCommon;
 
@@ -30,10 +31,18 @@ public class App {
      * @param args 起動引数
      */
     public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
+
+        // 常駐バッチなら以降の処理は行わない
+        boolean residentBatchEnabled = context.getEnvironment().getProperty("resident-batch.enabled", boolean.class, false);
+        if (residentBatchEnabled) {
+            return;
+        }
+
         int exitCode;
 
         try {
-            exitCode = SpringApplication.exit(SpringApplication.run(App.class, args));
+            exitCode = SpringApplication.exit(context);
         } catch (Exception e) {
             Logger logger = LoggerFactory.getLogger(App.class);
             logger.error("エラーが発生しました", e);

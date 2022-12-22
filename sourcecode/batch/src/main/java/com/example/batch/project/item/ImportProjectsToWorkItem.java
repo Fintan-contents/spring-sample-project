@@ -21,7 +21,7 @@ public class ImportProjectsToWorkItem implements LineNumberItem {
     /**
      * プロジェクトID
      */
-    @Domain("id")
+    @Domain("projectId")
     private Integer projectId;
 
     /**
@@ -70,7 +70,7 @@ public class ImportProjectsToWorkItem implements LineNumberItem {
      * 顧客ID
      */
     @Required
-    @Domain("id")
+    @Domain("clientId")
     private Integer clientId;
 
     /**

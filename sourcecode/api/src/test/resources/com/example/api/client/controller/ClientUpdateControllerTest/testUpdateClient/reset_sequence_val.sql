@@ -1,0 +1,1 @@
+alter sequence public.client_client_id_seq restart with 7;

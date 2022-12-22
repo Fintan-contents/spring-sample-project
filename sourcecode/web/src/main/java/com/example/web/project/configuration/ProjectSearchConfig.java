@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
-@PropertySource("classpath:/properties/project/ProjectSearch.properties")
+@PropertySource(value = "classpath:/properties/project/ProjectSearch.properties", encoding = "UTF-8")
 public class ProjectSearchConfig {
 
     /**

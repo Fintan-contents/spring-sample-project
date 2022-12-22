@@ -91,7 +91,7 @@ public class ProjectSearchFormTest extends ValidationTestBase {
      */
     @Test
     @WithMockUser
-    void testSearchDenyedCharacters() throws Exception {
+    void testSearchDeniedCharacters() throws Exception {
         MvcResult mvcResult = mvc
                 .perform(get(SEARCH_PATH)
                         .param("divisionId", "A")

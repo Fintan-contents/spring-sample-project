@@ -57,6 +57,17 @@
 			<artifactId>mockito-inline</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Database Riderのscript assertionを使用するために追加-->
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>${groovy.version.for-test}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

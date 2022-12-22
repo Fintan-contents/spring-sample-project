@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layout :: layout(~{:: title}, ~{:: body/content()}, true)}" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css" />
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/common.js"></script>
+    <title>ユーザ別従事プロジェクト</title>
+  </head>
+
+  <body class="container">
+    <span th:if="${message}" th:text="${message}"></span>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="fs-2 fw-bold">ユーザ別従事プロジェクト</div>
+      </div>
+    </div>
+    <form method="POST" th:action="@{/project/download/confirm}" action="./confirm.html" th:object="${projectDownloadForm}">
+      <span th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" class="text-danger fw-bold"></span>
+      <div class="row mb-3">
+        <div class="col-3">
+          <span class="form-label fw-bold">ステータス</span>
+          <span th:text="${@codeViewHelper.getName('C0400001', projectsByUserView.status)}" class="form-control-plaintext">作成済み</span>
+        </div>
+        <div class="col-3">
+          <span class="form-label fw-bold">要求日時</span>
+          <span th:text="${#temporals.format(projectsByUserView.requestDatetime, 'uuuu/MM/dd HH:mm')}" class="form-control-plaintext">2022/11/04 13:30</span>
+        </div>
+        <div class="col-3">
+          <span class="form-label fw-bold">作成日時</span>
+          <span th:text="${#temporals.format(projectsByUserView.createDatetime, 'uuuu/MM/dd HH:mm')}" class="form-control-plaintext">2022/11/04 13:30</span>
+        </div>
+        <div class="col-3">
+          <span class="form-label fw-bold">有効期限</span>
+          <span th:text="${#temporals.format(projectsByUserView.expireDatetime, 'uuuu/MM/dd HH:mm')}" class="form-control-plaintext">2022/11/04 13:30</span>
+        </div>
+      </div>
+      <div class="row justify-content-center pt-4">
+        <div class="col-2">
+          <input th:unless="${projectsByUserView.notBeAbleToCreateFile}" class="btn btn-primary w-100" type="submit" value="ファイル作成" />
+        </div>
+        <div class="col-2">
+          <a th:unless="${projectsByUserView.uncreatedOrExpired}" th:href="@{/project/download/file}" class="btn btn-primary w-100" href="./index.html">ダウンロード</a>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

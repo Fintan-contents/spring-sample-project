@@ -20,7 +20,7 @@
       </div>
     </div>
     <form class="row justify-content-start mb-4" th:action="@{/login}" action="../../top/index.html" method="POST"
-      autocomplete="off">
+      autocomplete="new-password">
       <div class="offset-md-1 col-md-4">
         <div class="mb-3 text-danger fw-bold"
           th:if="${#request.getParameter('error') != null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"

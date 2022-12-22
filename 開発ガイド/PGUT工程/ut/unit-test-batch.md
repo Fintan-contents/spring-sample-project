@@ -17,6 +17,7 @@
     - [ログ出力のテストコード](#ログ出力のテストコード)
     - [業務日付を扱う場合のテストコード](#業務日付を扱う場合のテストコード)
     - [取引単体テストのテストコード](#取引単体テストのテストコード)
+    - [システム日付のテストコード](#システム日付のテストコード)
 
 ## テスト単位
 
@@ -329,6 +330,13 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
 
         assertNotExistsLogLevel(Level.ERROR); // (3)
     }
+
+    @Test
+    void testSystemError() throws Exception {
+        jobLauncher.run(config.importProjectsToWorkJob(), jobParameters);
+
+        assertLogContainsInException("システム障害が発生しました"); // (4)
+    }
 }
 ```
 
@@ -336,6 +344,8 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
   - (1) 期待する文字列がログに出力されているかどうかは、`BatchTestBase`に用意されている`assertLogContains(String)`メソッドを使用する
   - (2) ログレベルと文字列を合わせて検証したい場合は、`BatchTestBase`に用意されている`assertLogContains(Level, String)`メソッドを使用する
   - (3) 指定されたレベルのログが出力されていないことを検証したい場合は、`BatchTestBase`に用意されている`assertNotExistsLogLevel`メソッドを使用する
+  - (4) スタックトレースに出力された例外に設定されているメッセージが意図したものか検証したい場合は、`BatchTestBase`に用意されている`assertLogContainsInException(String)`メソッドを使用する
+    - ログレベルも合わせて検証したい場合は、`assertLogContainsInException(Level, String)`メソッドを使用する
 
 #### 業務日付を扱う場合のテストコード
 
@@ -437,3 +447,16 @@ public class ImportProjectsIntegrationTest extends BatchTestBase {
   - (2) `JobLauncher`の`run`メソッドを使って複数のバッチ処理を実行して取引を再現することで、取引単体のテストを行う
 
 上記以外は、バッチ処理の単体テストと実装のポイントは同じとなる。
+
+#### システム日付のテストコード
+
+データベースに登録・更新したレコードのカラムにシステム日付やシステム日時がある場合に、それらのカラムをアサートする方法について説明する。
+
+![batch-assert-sysdate.jpg](./images/batch-assert-sysdate.jpg)
+
+- テストデータ(期待値)作成のポイント
+  - カラムにシステム日付が設定されていることを確認する場合は、期待値に`[systemDate]`と記述する
+  - カラムにシステム日時が設定されていることを確認する場合は、期待値に`groovy:(com.example.batch.test.SystemDateTimeAssertion.assertNow(value))`と記述する
+  - カラムにシステム日時からn週間後の日時が設定されていることを確認する場合は、期待値に`groovy:(com.example.batch.test.SystemDateTimeAssertion.assertAfterWeeks(value, n))`と記述する
+    - `n`の部分には、検証したい週の数を指定する(1週間後なら1を指定)
+    - 上記例ではシステム日時の1週間後であることを検証している

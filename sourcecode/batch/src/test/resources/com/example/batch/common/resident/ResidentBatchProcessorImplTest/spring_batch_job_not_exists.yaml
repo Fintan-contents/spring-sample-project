@@ -1,0 +1,5 @@
+request_table: []
+
+resident_batch_state:
+  - job_id: TESTJOB
+    running: 1

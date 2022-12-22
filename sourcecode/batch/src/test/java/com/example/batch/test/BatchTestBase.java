@@ -1,17 +1,11 @@
 package com.example.batch.test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.UUID;
-
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.classic.spi.IThrowableProxy;
+import ch.qos.logback.core.Appender;
+import com.example.batch.common.configuration.BatchExitCodeGenerator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.ArgumentCaptor;
@@ -26,12 +20,19 @@ import org.springframework.boot.autoconfigure.batch.JobExecutionEvent;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.example.batch.common.configuration.BatchExitCodeGenerator;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.Appender;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * バッチのテストクラスの基底クラス。
@@ -159,6 +160,45 @@ public abstract class BatchTestBase {
 
         assertThat(logCaptor.getAllValues())
                 .anyMatch(event -> event.getLevel() == level && event.getFormattedMessage().contains(message));
+    }
+
+    /**
+     * 指定した文字列が、ログに書き出された例外のメッセージに含まれるかを検証する。
+     * @param message ログに書き出された例外のメッセージに含まれることを期待する文字列
+     */
+    protected void assertLogContainsInException(String message) {
+        captureLog();
+
+        assertThat(logCaptor.getAllValues())
+                .anyMatch(event -> containsMessage(event.getThrowableProxy(), message));
+    }
+
+    /**
+     * 指定した文字列が、指定されたログレベルでログに書き出された例外のメッセージに含まれるかを検証する。
+     * @param level 期待するログレベル
+     * @param message ログに書き出された例外のメッセージに含まれることを期待する文字列
+     */
+    protected void assertLogContainsInException(Level level, String message) {
+        captureLog();
+
+        assertThat(logCaptor.getAllValues())
+                .anyMatch(event -> event.getLevel() == level && containsMessage(event.getThrowableProxy(), message));
+    }
+
+    /**
+     * 指定した文字列を含む原因例外が存在するか再帰的に検査する。
+     * @param throwableProxy 例外プロキシ
+     * @param message 検査する文字列
+     * @return 文字列を含む例外が存在した場合はtrue
+     */
+    private boolean containsMessage(IThrowableProxy throwableProxy, String message) {
+        if (throwableProxy == null || throwableProxy.getMessage() == null) {
+            return false;
+        }
+        if (throwableProxy.getMessage().contains(message)) {
+            return true;
+        }
+        return containsMessage(throwableProxy.getCause(), message);
     }
 
     /**
