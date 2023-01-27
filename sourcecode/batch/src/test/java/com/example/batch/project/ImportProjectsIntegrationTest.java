@@ -18,7 +18,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 /**
  * プロジェクト一括登録バッチのテスト。
@@ -50,9 +50,9 @@ public class ImportProjectsIntegrationTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testIntegration/testIntegration.xls",
+            value = BASE_PATH + "/testIntegration/testIntegration.xlsx",
             executeScriptsBefore = BASE_PATH + "/testIntegration/reset_sequence_val_project.sql")
-    @ExpectedDataSet(BASE_PATH + "/testIntegration/expected-testIntegration.xls")
+    @ExpectedDataSet(BASE_PATH + "/testIntegration/expected-testIntegration.xlsx")
     void testIntegration() throws Exception {
         copy("testIntegration/input.csv", INPUT_FILE);
 
@@ -70,9 +70,9 @@ public class ImportProjectsIntegrationTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testIntegrationRerun/testIntegrationRerun.xls",
+            value = BASE_PATH + "/testIntegrationRerun/testIntegrationRerun.xlsx",
             executeScriptsBefore = BASE_PATH + "/testIntegrationRerun/reset_sequence_val_project.sql")
-    @ExpectedDataSet(BASE_PATH + "/testIntegrationRerun/expected-testIntegrationRerun.xls")
+    @ExpectedDataSet(BASE_PATH + "/testIntegrationRerun/expected-testIntegrationRerun.xlsx")
     void testIntegrationRerun() throws Exception {
         copy("testIntegrationRerun/input.csv", INPUT_FILE);
 

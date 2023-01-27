@@ -3,7 +3,7 @@ package com.example.api.client.controller;
 import com.example.api.test.ApiTest;
 import com.example.api.test.RestControllerTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ class ClientDetailControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testGetClient/testGetClient.xls")
+    @DataSet(BASE_PATH + "testGetClient/testGetClient.xlsx")
     void testGetClient() {
         RequestEntity<Void> request = RequestEntity.get(ENDPOINT + "/3").build();
 
@@ -48,7 +48,7 @@ class ClientDetailControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testClientTableHasNoRecord/testClientTableHasNoRecord.xls")
+    @DataSet(BASE_PATH + "testClientTableHasNoRecord/testClientTableHasNoRecord.xlsx")
     void testClientTableHasNoRecord() {
         RequestEntity<Void> request = RequestEntity.get(ENDPOINT + "/1").build();
 
@@ -66,7 +66,7 @@ class ClientDetailControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xls")
+    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xlsx")
     void testNoClientWithMatchingPathParameter() {
         RequestEntity<Void> request = RequestEntity.get(ENDPOINT + "/11").build();
 

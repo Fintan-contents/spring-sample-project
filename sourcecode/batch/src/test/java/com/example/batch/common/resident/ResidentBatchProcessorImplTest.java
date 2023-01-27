@@ -25,7 +25,7 @@ import com.example.batch.common.resident.mapper.ResidentBatchMapper;
 import com.example.batch.test.BatchTest;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 class ResidentBatchProcessorImplTest {
 

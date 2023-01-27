@@ -7,7 +7,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +40,9 @@ public class UpdateBusinessDateTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testNormal/testNormal.xls"
+            value = BASE_PATH + "/testNormal/testNormal.xlsx"
     )
-    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xls")
+    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xlsx")
     void testNormal() throws Exception {
         properties.setSegmentId("00");
         jobLauncher.run(config.updateBusinessDateJob(), jobParameters);
@@ -55,9 +55,9 @@ public class UpdateBusinessDateTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testSpecifyBusinessDate/testSpecifyBusinessDate.xls"
+            value = BASE_PATH + "/testSpecifyBusinessDate/testSpecifyBusinessDate.xlsx"
     )
-    @ExpectedDataSet(BASE_PATH + "/testSpecifyBusinessDate/expected-testSpecifyBusinessDate.xls")
+    @ExpectedDataSet(BASE_PATH + "/testSpecifyBusinessDate/expected-testSpecifyBusinessDate.xlsx")
     void testSpecifyBusinessDate() throws Exception {
         properties.setSegmentId("01");
         JobParameters jobParameters = jobParametersBuilder()
@@ -140,7 +140,7 @@ public class UpdateBusinessDateTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testErrorMessageAndStatusWhenNoExistSegmentId/testErrorMessageAndStatusWhenNoExistSegmentId.xls"
+            value = BASE_PATH + "/testErrorMessageAndStatusWhenNoExistSegmentId/testErrorMessageAndStatusWhenNoExistSegmentId.xlsx"
     )
     void testErrorMessageAndStatusWhenNoExistSegmentId() throws Exception {
         properties.setSegmentId("99");
@@ -158,9 +158,9 @@ public class UpdateBusinessDateTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testDBDoesNotBeUpdatedWhenNoExistSegmentId/testDBDoesNotBeUpdatedWhenNoExistSegmentId.xls"
+            value = BASE_PATH + "/testDBDoesNotBeUpdatedWhenNoExistSegmentId/testDBDoesNotBeUpdatedWhenNoExistSegmentId.xlsx"
     )
-    @ExpectedDataSet(BASE_PATH + "/testDBDoesNotBeUpdatedWhenNoExistSegmentId/expected-testDBDoesNotBeUpdatedWhenNoExistSegmentId.xls")
+    @ExpectedDataSet(BASE_PATH + "/testDBDoesNotBeUpdatedWhenNoExistSegmentId/expected-testDBDoesNotBeUpdatedWhenNoExistSegmentId.xlsx")
     void testDBDoesNotBeUpdatedWhenNoExistSegmentId() throws Exception {
         properties.setSegmentId("99");
 
@@ -174,9 +174,9 @@ public class UpdateBusinessDateTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testRerun/testRerun.xls"
+            value = BASE_PATH + "/testRerun/testRerun.xlsx"
     )
-    @ExpectedDataSet(BASE_PATH + "/testRerun/expected-testRerun.xls")
+    @ExpectedDataSet(BASE_PATH + "/testRerun/expected-testRerun.xlsx")
     void testRerun() throws Exception {
         properties.setSegmentId("00");
 

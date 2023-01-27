@@ -88,9 +88,9 @@ src
                        └ project
                             └ ImportProjectsTest                 #テストクラス名
                                 ├ testNormal                     #テストメソッド名
-                                |   ├ testNormal.xls             #テストデータ
+                                |   ├ testNormal.xlsx            #テストデータ
                                 |   ├ input.csv                  #テストデータ
-                                |   └ expected-testNormal.xls    #テストデータ
+                                |   └ expected-testNormal.xlsx   #テストデータ
                                 └ reset_sequence_val_project.sql #テストデータ(共通)
 ```
 
@@ -104,9 +104,9 @@ src
     ![batch-dataset-example.jpg](./images/batch-dataset-example.jpg)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`[対象のテストメソッド名].xls`とする
+        - ファイル名は`[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムの値は`null`となる
@@ -150,9 +150,9 @@ CSVファイルの取込機能を持つバッチ処理をテストする場合�
     ![batch-expected-example.jpg](./images/batch-expected-example.jpg)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`expected-[対象のテストメソッド名].xls`とする
+        - ファイル名は`expected-[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムは検証対象外となる
@@ -191,10 +191,10 @@ public class ImportProjectsTest extends BatchTestBase { // (3)
 
     @Test
     @DataSet( // (6)
-        value = BASE_PATH + "/testNormalInsert/testNormalInsert.xls", // (6)
+        value = BASE_PATH + "/testNormalInsert/testNormalInsert.xlsx", // (6)
         executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql" // (6)
     )
-    @ExpectedDataSet(BASE_PATH + "/testNormalInsert/expected-testNormalInsert.xls") // (7)
+    @ExpectedDataSet(BASE_PATH + "/testNormalInsert/expected-testNormalInsert.xlsx") // (7)
     void testNormalInsert() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters); // (8)
     }
@@ -239,10 +239,10 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
 
     @Test
     @DataSet(
-        value = BASE_PATH + "/testNormal/testNormal.xls",
+        value = BASE_PATH + "/testNormal/testNormal.xlsx",
         executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql"
     )
-    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xls")
+    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xlsx")
     void testNormal() throws Exception {
         copy("testNormal/input.csv", INPUT_FILE); // (2)
 
@@ -277,7 +277,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
     JobParameters jobParameters = jobParametersBuilder().toJobParameters();
 
     @Test
-    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xls")
+    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xlsx")
     void testSearchCondition() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -368,7 +368,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
     }
     
     @Test
-    @DataSet(BASE_PATH + "/testSetBusinessDate/testSetBusinessDate.xls")
+    @DataSet(BASE_PATH + "/testSetBusinessDate/testSetBusinessDate.xlsx")
     void testSetBusinessDate() throws Exception {
         businessDateSupplier.setFixedDate("20210101"); // (3)
 
@@ -380,7 +380,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
     }
 
     @Test
-    @DataSet(BASE_PATH + "/testSetBusinessDateByJobParameters/testSetBusinessDateByJobParameters.xls")
+    @DataSet(BASE_PATH + "/testSetBusinessDateByJobParameters/testSetBusinessDateByJobParameters.xlsx")
     void testSetBusinessDateByJobParameters() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addString("businessDate", "20210101") // (4)
@@ -426,10 +426,10 @@ public class ImportProjectsIntegrationTest extends BatchTestBase {
 
     @Test
     @DataSet(
-        value = BASE_PATH + "/testIntegration/testIntegration.xls",
+        value = BASE_PATH + "/testIntegration/testIntegration.xlsx",
         executeScriptsBefore = BASE_PATH + "/testIntegration/reset_sequence_val_project.sql"
     )
-    @ExpectedDataSet(BASE_PATH + "/testIntegration/expected-testIntegration.xls")
+    @ExpectedDataSet(BASE_PATH + "/testIntegration/expected-testIntegration.xlsx")
     void testIntegration() throws Exception {
         copy("testIntegration/input.csv", INPUT_FILE);
 

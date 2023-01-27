@@ -3,7 +3,7 @@ package com.example.api.client.controller;
 import com.example.api.test.ApiTest;
 import com.example.api.test.RestControllerTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,7 +38,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      */
     @Test
     @DataSet(BASE_PATH
-            + "testSearchClientWithoutParameterReturnsAllClients/testSearchClientWithoutParameterReturnsAllClients.xls")
+            + "testSearchClientWithoutParameterReturnsAllClients/testSearchClientWithoutParameterReturnsAllClients.xlsx")
     void testSearchClientWithoutParameterReturnsAllClients() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .build().encode().toUri();
@@ -78,7 +78,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testValidParameters/testValidParameters.xls")
+    @DataSet(BASE_PATH + "testValidParameters/testValidParameters.xlsx")
     void testValidParameters() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", CLIENT_NAME_MAX_LENGTH)
@@ -97,7 +97,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testInvalidParameters/testInvalidParameters.xls")
+    @DataSet(BASE_PATH + "testInvalidParameters/testInvalidParameters.xlsx")
     void testInvalidParameters() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", "invalid parameter")
@@ -119,7 +119,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testSearchClientByClientName/testSearchClientByClientName.xls")
+    @DataSet(BASE_PATH + "testSearchClientByClientName/testSearchClientByClientName.xlsx")
     void testSearchClientByClientName() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", "テスト会社３")
@@ -140,7 +140,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testSearchClientByIndustryCode/testSearchClientByIndustryCode.xls")
+    @DataSet(BASE_PATH + "testSearchClientByIndustryCode/testSearchClientByIndustryCode.xlsx")
     void testSearchClientByIndustryCode() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("industryCode", "01")
@@ -161,7 +161,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testSearchClientByClientNameReturnsEmpty/testSearchClientByClientNameReturnsEmpty.xls")
+    @DataSet(BASE_PATH + "testSearchClientByClientNameReturnsEmpty/testSearchClientByClientNameReturnsEmpty.xlsx")
     void testSearchClientByClientNameReturnsEmpty() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", "存在しない会社")
@@ -182,7 +182,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testSearchClientByIndustryCodeReturnsEmpty/testSearchClientByIndustryCodeReturnsEmpty.xls")
+    @DataSet(BASE_PATH + "testSearchClientByIndustryCodeReturnsEmpty/testSearchClientByIndustryCodeReturnsEmpty.xlsx")
     void testSearchClientByIndustryCodeReturnsEmpty() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("industryCode", "03")
@@ -203,7 +203,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testSearchClientByClientNameAndIndustryCode/testSearchClientByClientNameAndIndustryCode.xls")
+    @DataSet(BASE_PATH + "testSearchClientByClientNameAndIndustryCode/testSearchClientByClientNameAndIndustryCode.xlsx")
     void testSearchClientByClientNameAndIndustryCode() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", "テスト会社３")
@@ -226,7 +226,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      */
     @Test
     @DataSet(BASE_PATH
-            + "testSearchClientByClientNameAndIndustryCodeReturnsEmpty/testSearchClientByClientNameAndIndustryCodeReturnsEmpty.xls")
+            + "testSearchClientByClientNameAndIndustryCodeReturnsEmpty/testSearchClientByClientNameAndIndustryCodeReturnsEmpty.xlsx")
     void testSearchClientByClientNameAndIndustryCodeReturnsEmpty() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("clientName", "存在しない会社")
@@ -248,7 +248,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testResultIsOverUpperLimit/testResultIsOverUpperLimit.xls")
+    @DataSet(BASE_PATH + "testResultIsOverUpperLimit/testResultIsOverUpperLimit.xlsx")
     void testResultIsOverUpperLimit() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .build().encode().toUri();
@@ -268,7 +268,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testClientTableHasNoRecord/testClientTableHasNoRecord.xls")
+    @DataSet(BASE_PATH + "testClientTableHasNoRecord/testClientTableHasNoRecord.xlsx")
     void testClientTableHasNoRecord() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .build().encode().toUri();
@@ -288,7 +288,7 @@ class ClientSearchControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testResultIsEqualsUpperLimit/testResultIsEqualsUpperLimit.xls")
+    @DataSet(BASE_PATH + "testResultIsEqualsUpperLimit/testResultIsEqualsUpperLimit.xlsx")
     void testResultIsEqualsUpperLimit() {
         URI uri = UriComponentsBuilder.fromPath(ENDPOINT)
                 .queryParam("industryCode", "02")

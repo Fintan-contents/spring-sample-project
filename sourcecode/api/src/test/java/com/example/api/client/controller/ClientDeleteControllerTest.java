@@ -12,7 +12,7 @@ import com.example.api.test.ApiTest;
 import com.example.api.test.RestControllerTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 /**
  * 顧客削除APIのテスト。
@@ -32,8 +32,8 @@ class ClientDeleteControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(BASE_PATH + "testDeleteClient/testDeleteClient.xls")
-    @ExpectedDataSet(BASE_PATH + "testDeleteClient/expected-testDeleteClient.xls")
+    @DataSet(BASE_PATH + "testDeleteClient/testDeleteClient.xlsx")
+    @ExpectedDataSet(BASE_PATH + "testDeleteClient/expected-testDeleteClient.xlsx")
     void testDeleteClient() {
         RequestEntity<Void> request = RequestEntity.delete(ENDPOINT + "/3").build();
 
@@ -51,7 +51,7 @@ class ClientDeleteControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xls")
+    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xlsx")
     void testNoClientWithMatchingPathParameter() {
         RequestEntity<Void> request = RequestEntity.delete(ENDPOINT + "/11").build();
 

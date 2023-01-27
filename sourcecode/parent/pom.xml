@@ -19,7 +19,7 @@
 		<mybatis-spring-boot.version>2.3.0</mybatis-spring-boot.version>
 		<keel-transaction-token-check.version>1.0.0</keel-transaction-token-check.version>
 		<archunit.version>1.0.1</archunit.version>
-		<database-rider.version>1.35.0</database-rider.version>
+		<database-rider.version>1.35.1</database-rider.version>
 		<!-- Database Riderのscript assertionで使用するGroovyのバージョン-->
 		<groovy.version.for-test>2.4.6</groovy.version.for-test>
 		<!-- https://repo.maven.apache.org/maven2/org/dbunit/dbunit/2.7.3/dbunit-2.7.3.pom を参考にPOIのバージョンを設定 -->
@@ -59,12 +59,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.github.database-rider</groupId>
-				<artifactId>rider-spring</artifactId>
+				<artifactId>rider-junit5</artifactId>
 				<version>${database-rider.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
+				<artifactId>poi-ooxml</artifactId>
 				<version>${poi.version}</version>
 				<scope>test</scope>
 			</dependency>

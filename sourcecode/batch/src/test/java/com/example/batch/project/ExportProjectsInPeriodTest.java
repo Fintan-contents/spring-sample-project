@@ -18,7 +18,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.example.common.util.BusinessDateSupplier;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 /**
  * 期間内プロジェクト一括出力バッチのテスト。
@@ -56,7 +56,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xls")
+    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xlsx")
     void testSearchCondition() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -71,7 +71,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testCreateEmptyFileIfNoOutputRecord/testCreateEmptyFileIfNoOutputRecord.xls")
+    @DataSet(BASE_PATH + "/testCreateEmptyFileIfNoOutputRecord/testCreateEmptyFileIfNoOutputRecord.xlsx")
     void testCreateEmptyFileIfNoOutputRecord() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -84,7 +84,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testOutputSingleRecord/testOutputSingleRecord.xls")
+    @DataSet(BASE_PATH + "/testOutputSingleRecord/testOutputSingleRecord.xlsx")
     void testOutputSingleRecord() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -99,7 +99,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSort/testSort.xls")
+    @DataSet(BASE_PATH + "/testSort/testSort.xlsx")
     void testSort() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -114,7 +114,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMaxLength/testMaxLength.xls")
+    @DataSet(BASE_PATH + "/testMaxLength/testMaxLength.xlsx")
     void testMaxLength() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -129,7 +129,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMinLength/testMinLength.xls")
+    @DataSet(BASE_PATH + "/testMinLength/testMinLength.xlsx")
     void testMinLength() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -144,7 +144,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testOutputNull/testOutputNull.xls")
+    @DataSet(BASE_PATH + "/testOutputNull/testOutputNull.xlsx")
     void testOutputNull() throws Exception {
         jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters);
 
@@ -159,7 +159,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSetBusinessDateByJobParameters/testSetBusinessDateByJobParameters.xls")
+    @DataSet(BASE_PATH + "/testSetBusinessDateByJobParameters/testSetBusinessDateByJobParameters.xlsx")
     void testSetBusinessDateByJobParameters() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addString("businessDate", "20210101")
@@ -178,7 +178,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSetBusinessDateJobParameterIsEmpty/testSetBusinessDateJobParameterIsEmpty.xls")
+    @DataSet(BASE_PATH + "/testSetBusinessDateJobParameterIsEmpty/testSetBusinessDateJobParameterIsEmpty.xlsx")
     void testSetBusinessDateJobParameterIsBlank() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addString("businessDate", "   ")
@@ -197,7 +197,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testExitCodeNormal/testExitCodeNormal.xls")
+    @DataSet(BASE_PATH + "/testExitCodeNormal/testExitCodeNormal.xlsx")
     void testExitCodeNormal() throws Exception {
         int exitCode = getExitCode(jobLauncher.run(config.exportProjectsInPeriodJob(), jobParameters));
         assertThat(exitCode).isEqualTo(0);

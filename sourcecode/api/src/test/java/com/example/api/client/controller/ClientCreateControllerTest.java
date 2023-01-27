@@ -4,7 +4,7 @@ import com.example.api.test.ApiTest;
 import com.example.api.test.RestControllerTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -70,9 +70,9 @@ class ClientCreateControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(value = BASE_PATH + "testCreateClient/testCreateClient.xls",
+    @DataSet(value = BASE_PATH + "testCreateClient/testCreateClient.xlsx",
             executeScriptsBefore = BASE_PATH + "testCreateClient/reset_sequence_val.sql")
-    @ExpectedDataSet(BASE_PATH + "testCreateClient/expected-testCreateClient.xls")
+    @ExpectedDataSet(BASE_PATH + "testCreateClient/expected-testCreateClient.xlsx")
     void testCreateClient() {
         RequestEntity<String> request = RequestEntity.post(ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -127,8 +127,8 @@ class ClientCreateControllerTest extends RestControllerTestBase {
      * 
      */
     @Test
-    @DataSet(BASE_PATH + "testDuplicateKeyException/testDuplicateKeyException.xls")
-    @ExpectedDataSet(BASE_PATH + "testDuplicateKeyException/expected-testDuplicateKeyException.xls")
+    @DataSet(BASE_PATH + "testDuplicateKeyException/testDuplicateKeyException.xlsx")
+    @ExpectedDataSet(BASE_PATH + "testDuplicateKeyException/expected-testDuplicateKeyException.xlsx")
     void testDuplicateKeyException() {
         RequestEntity<String> request = RequestEntity.post(ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)

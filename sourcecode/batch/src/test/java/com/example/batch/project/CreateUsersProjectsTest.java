@@ -5,7 +5,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xls")
+    @DataSet(BASE_PATH + "/testSearchCondition/testSearchCondition.xlsx")
     void testSearchCondition() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)
@@ -57,7 +57,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testNoTargetProjects/testNoTargetProjects.xls")
+    @DataSet(BASE_PATH + "/testNoTargetProjects/testNoTargetProjects.xlsx")
     void testNoTargetProjects() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 2L)
@@ -76,7 +76,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testSort/testSort.xls")
+    @DataSet(BASE_PATH + "/testSort/testSort.xlsx")
     void testSort() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)
@@ -95,7 +95,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMaxLength/testMaxLength.xls")
+    @DataSet(BASE_PATH + "/testMaxLength/testMaxLength.xlsx")
     void testMaxLength() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)
@@ -114,7 +114,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMinLength/testMinLength.xls")
+    @DataSet(BASE_PATH + "/testMinLength/testMinLength.xlsx")
     void testMinLength() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)
@@ -133,7 +133,7 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testOutputNull/testOutputNull.xls")
+    @DataSet(BASE_PATH + "/testOutputNull/testOutputNull.xlsx")
     void testOutputNull() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)
@@ -152,8 +152,8 @@ public class CreateUsersProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testUpdateProjectsByUser/testUpdateProjectsByUser.xls")
-    @ExpectedDataSet(BASE_PATH + "/testUpdateProjectsByUser/expected-testUpdateProjectsByUser.xls")
+    @DataSet(BASE_PATH + "/testUpdateProjectsByUser/testUpdateProjectsByUser.xlsx")
+    @ExpectedDataSet(BASE_PATH + "/testUpdateProjectsByUser/expected-testUpdateProjectsByUser.xlsx")
     void testUpdateProjectsByUser() throws Exception {
         JobParameters jobParameters = jobParametersBuilder()
                 .addLong("request.id", 1L)

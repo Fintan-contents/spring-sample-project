@@ -48,13 +48,13 @@ src
                    └ api
                        └ client
                            └ controller
-                               └ ClientCreateControllerTest       #テストクラス名
-                                   ├ testSuccess                  #テストメソッド名
-                                   │   ├ testSuccess.xls          #テストデータ
-                                   │   ├ request.json             #テストデータ
-                                   │   ├ expected.json            #テストデータ
-                                   │   └ expected-testSuccess.xls #テストデータ
-                                   └ reset_sequence_val.sql       #テストデータ(共通)
+                               └ ClientCreateControllerTest        #テストクラス名
+                                   ├ testSuccess                   #テストメソッド名
+                                   │   ├ testSuccess.xlsx          #テストデータ
+                                   │   ├ request.json              #テストデータ
+                                   │   ├ expected.json             #テストデータ
+                                   │   └ expected-testSuccess.xlsx #テストデータ
+                                   └ reset_sequence_val.sql        #テストデータ(共通)
 ```
 
 #### データベース (テスト実施前)
@@ -67,9 +67,9 @@ src
     ![dataset-example](./images/dataset-example.PNG)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`[対象のテストメソッド名].xls`とする
+        - ファイル名は`[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムの値は`null`となる
@@ -99,9 +99,9 @@ src
     ![expected-dataset-example](./images/expected-dataset-example.PNG)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`expected-[対象のテストメソッド名].xls`とする
+        - ファイル名は`expected-[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムは検証対象外となる
@@ -162,8 +162,8 @@ src
         ExampleCommonService sut;
 
         @Test
-        @DataSet(BASE_PATH + "testCommonMethod/testCommonMethod.xls") // (5)
-        @ExpectedDataSet(BASE_PATH + "testCommonMethod/expected-testCommonMethod.xls") // (6)
+        @DataSet(BASE_PATH + "testCommonMethod/testCommonMethod.xlsx") // (5)
+        @ExpectedDataSet(BASE_PATH + "testCommonMethod/expected-testCommonMethod.xlsx") // (6)
         void testCommonMethod(){ // (7)
             // (8)
         }
@@ -193,9 +193,9 @@ src
         private static final String BASE_PATH = "com/example/api/client/controller/ClientCreateControllerTest/";
 
         @Test
-        @DataSet(value = BASE_PATH + "testCreateClient/testCreateClient.xls"
+        @DataSet(value = BASE_PATH + "testCreateClient/testCreateClient.xlsx"
                 , executeScriptsBefore = BASE_PATH + "reset_sequence_val.sql") // (5)
-        @ExpectedDataSet(BASE_PATH + "testCreateClient/expected-testCreateClient.xls") // (6)
+        @ExpectedDataSet(BASE_PATH + "testCreateClient/expected-testCreateClient.xlsx") // (6)
         void testCreateClient() throws JSONException { // (7)
             RequestEntity<String> request = RequestEntity.post("/clients")
                     .contentType(MediaType.APPLICATION_JSON)

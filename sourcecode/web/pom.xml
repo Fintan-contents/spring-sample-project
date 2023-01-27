@@ -89,7 +89,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.database-rider</groupId>
-			<artifactId>rider-spring</artifactId>
+			<artifactId>rider-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

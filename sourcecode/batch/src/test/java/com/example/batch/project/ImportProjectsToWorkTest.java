@@ -18,7 +18,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -52,7 +52,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @ExpectedDataSet(BASE_PATH + "/testRequired/expected-testRequired.xls")
+    @ExpectedDataSet(BASE_PATH + "/testRequired/expected-testRequired.xlsx")
     void testRequired() throws Exception {
         copy("testRequired/input.csv", INPUT_FILE);
 
@@ -76,7 +76,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testOptional/expected-testOptional.xls")
+    @ExpectedDataSet(BASE_PATH + "/testOptional/expected-testOptional.xlsx")
     void testOptional() throws Exception {
         copy("testOptional/input.csv", INPUT_FILE);
 
@@ -90,7 +90,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testMaxLength/expected-testMaxLength.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMaxLength/expected-testMaxLength.xlsx")
     void testMaxLength() throws Exception {
         copy("testMaxLength/input.csv", INPUT_FILE);
 
@@ -103,7 +103,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @ExpectedDataSet(BASE_PATH + "/testMaxLengthError/expected-testMaxLengthError.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMaxLengthError/expected-testMaxLengthError.xlsx")
     void testMaxLengthError() throws Exception {
         copy("testMaxLengthError/input.csv", INPUT_FILE);
 
@@ -122,7 +122,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testMaxValue/expected-testMaxValue.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMaxValue/expected-testMaxValue.xlsx")
     void testMaxValue() throws Exception {
         copy("testMaxValue/input.csv", INPUT_FILE);
 
@@ -135,7 +135,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @ExpectedDataSet(BASE_PATH + "/testMaxValueError/expected-testMaxValueError.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMaxValueError/expected-testMaxValueError.xlsx")
     void testMaxValueError() throws Exception {
         copy("testMaxValueError/input.csv", INPUT_FILE);
 
@@ -154,7 +154,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testMinValue/expected-testMinValue.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMinValue/expected-testMinValue.xlsx")
     void testMinValue() throws Exception {
         copy("testMinValue/input.csv", INPUT_FILE);
 
@@ -216,9 +216,9 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testNormal/testNormal.xls",
+            value = BASE_PATH + "/testNormal/testNormal.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xls")
+    @ExpectedDataSet(BASE_PATH + "/testNormal/expected-testNormal.xlsx")
     void testNormal() throws Exception {
         copy("testNormal/input.csv", INPUT_FILE);
 
@@ -333,7 +333,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testMultiRecord/expected-testMultiRecord.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMultiRecord/expected-testMultiRecord.xlsx")
     void testMultiRecord() throws Exception {
         copy("testMultiRecord/input.csv", INPUT_FILE);
 
@@ -347,7 +347,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testSkip/expected-testSkip.xls")
+    @ExpectedDataSet(BASE_PATH + "/testSkip/expected-testSkip.xlsx")
     void testSkip() throws Exception {
         copy("testSkip/input.csv", INPUT_FILE);
 
@@ -360,7 +360,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @ExpectedDataSet(BASE_PATH + "/testEmptyFile/expected-testEmptyFile.xls")
+    @ExpectedDataSet(BASE_PATH + "/testEmptyFile/expected-testEmptyFile.xlsx")
     void testEmptyFile() throws Exception {
         copy("testEmptyFile/input.csv", INPUT_FILE);
 
@@ -377,7 +377,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @ExpectedDataSet(BASE_PATH + "/testInvalidCsv/expected-testInvalidCsv.xls")
+    @ExpectedDataSet(BASE_PATH + "/testInvalidCsv/expected-testInvalidCsv.xlsx")
     void testInvalidCsv() throws Exception {
         copy("testInvalidCsv/input.csv", INPUT_FILE);
 
@@ -420,7 +420,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
      */
     @Test
     @DataSet(executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project_work.sql")
-    @ExpectedDataSet(BASE_PATH + "/testRerun/expected-testRerun.xls")
+    @ExpectedDataSet(BASE_PATH + "/testRerun/expected-testRerun.xlsx")
     void testRerun() throws Exception {
         copy("testRerun/input.csv", INPUT_FILE);
 

@@ -61,11 +61,11 @@ src
                    └ web
                        └ project
                            └ service
-                               └ ProjectCommonServiceTest       #テストクラス名
-                                   ├ testSelectAllDepartment                  #テストメソッド名
-                                   │   ├ testSelectAllDepartment.xls          #テストデータ
-                                   │   └ expected-testSelectAllDepartment.xls #テストデータ
-                                   └ reset_sequence_val.sql       #テストデータ(共通)
+                               └ ProjectCommonServiceTest                      #テストクラス名
+                                   ├ testSelectAllDepartment                   #テストメソッド名
+                                   │   ├ testSelectAllDepartment.xlsx          #テストデータ
+                                   │   └ expected-testSelectAllDepartment.xlsx #テストデータ
+                                   └ reset_sequence_val.sql                    #テストデータ(共通)
 ```
 
 #### データベース (テスト実施前)
@@ -78,9 +78,9 @@ src
     ![dataset-example](./images/dataset-example.PNG)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`[対象のテストメソッド名].xls`とする
+        - ファイル名は`[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムの値は`null`となる
@@ -110,9 +110,9 @@ src
     ![expected-dataset-example](./images/expected-dataset-example.PNG)
 
     - テストデータ作成のポイント
-        - Excel(`.xls`形式)で作成する
+        - Excelで作成する
         - 全セル文字列形式とする
-        - ファイル名は`expected-[対象のテストメソッド名].xls`とする
+        - ファイル名は`expected-[対象のテストメソッド名].xlsx`とする
         - 1シートにつき1テーブルずつデータを記載し、シート名はテーブル名とする
         - 各シートの1行目にはカラム名を記載する
         - カラムを省略した場合はそのカラムは検証対象外となる
@@ -137,8 +137,8 @@ class ProjectCommonServiceTest {
     ProjectCommonService sut;
 
     @Test
-    @DataSet(BASE_PATH + "testSelectAllDepartment/testSelectAllDepartment.xls") // (5)
-    @ExpectedDataSet(BASE_PATH + "testSelectAllDepartment/expected-testSelectAllDepartment.xls") // (6)
+    @DataSet(BASE_PATH + "testSelectAllDepartment/testSelectAllDepartment.xlsx") // (5)
+    @ExpectedDataSet(BASE_PATH + "testSelectAllDepartment/expected-testSelectAllDepartment.xlsx") // (6)
     void testSelectAllDepartment(){ // (7)
         // (8)
         List<OrganizationDto> actual = sut.selectAllDepartment();

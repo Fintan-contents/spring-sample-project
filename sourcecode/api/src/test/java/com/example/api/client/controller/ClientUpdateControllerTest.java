@@ -14,7 +14,7 @@ import com.example.api.test.ApiTest;
 import com.example.api.test.RestControllerTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 /**
  * 顧客更新APIのテスト。
@@ -71,9 +71,9 @@ class ClientUpdateControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(value = BASE_PATH + "testUpdateClient/testUpdateClient.xls",
+    @DataSet(value = BASE_PATH + "testUpdateClient/testUpdateClient.xlsx",
             executeScriptsBefore = BASE_PATH + "testUpdateClient/reset_sequence_val.sql")
-    @ExpectedDataSet(BASE_PATH + "testUpdateClient/expected-testUpdateClient.xls")
+    @ExpectedDataSet(BASE_PATH + "testUpdateClient/expected-testUpdateClient.xlsx")
     void testUpdateClient() {
         RequestEntity<String> request = RequestEntity.put(ENDPOINT + "/3")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -92,9 +92,9 @@ class ClientUpdateControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(value = BASE_PATH + "testUpdateClientWithSameClientname/testUpdateClientWithSameClientname.xls",
+    @DataSet(value = BASE_PATH + "testUpdateClientWithSameClientname/testUpdateClientWithSameClientname.xlsx",
             executeScriptsBefore = BASE_PATH + "testUpdateClientWithSameClientname/reset_sequence_val.sql")
-    @ExpectedDataSet(BASE_PATH + "testUpdateClientWithSameClientname/expected-testUpdateClientWithSameClientname.xls")
+    @ExpectedDataSet(BASE_PATH + "testUpdateClientWithSameClientname/expected-testUpdateClientWithSameClientname.xlsx")
     void testUpdateClientWithSameClientname() {
         RequestEntity<String> request = RequestEntity.put(ENDPOINT + "/3")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -188,8 +188,8 @@ class ClientUpdateControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(BASE_PATH + "testDuplicateKeyException/testDuplicateKeyException.xls")
-    @ExpectedDataSet(BASE_PATH + "testDuplicateKeyException/expected-testDuplicateKeyException.xls")
+    @DataSet(BASE_PATH + "testDuplicateKeyException/testDuplicateKeyException.xlsx")
+    @ExpectedDataSet(BASE_PATH + "testDuplicateKeyException/expected-testDuplicateKeyException.xlsx")
     void testDuplicateKeyException() {
         RequestEntity<String> request = RequestEntity.put(ENDPOINT + "/3")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -208,8 +208,8 @@ class ClientUpdateControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xls")
-    @ExpectedDataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/expected-testNoClientWithMatchingPathParameter.xls")
+    @DataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/testNoClientWithMatchingPathParameter.xlsx")
+    @ExpectedDataSet(BASE_PATH + "testNoClientWithMatchingPathParameter/expected-testNoClientWithMatchingPathParameter.xlsx")
     void testNoClientWithMatchingPathParameter() {
 
         RequestEntity<String> request = RequestEntity.put(ENDPOINT + "/11")
@@ -230,8 +230,8 @@ class ClientUpdateControllerTest extends RestControllerTestBase {
      *
      */
     @Test
-    @DataSet(BASE_PATH + "testOptimisticLock/testOptimisticLock.xls")
-    @ExpectedDataSet(BASE_PATH + "testOptimisticLock/expected-testOptimisticLock.xls")
+    @DataSet(BASE_PATH + "testOptimisticLock/testOptimisticLock.xlsx")
+    @ExpectedDataSet(BASE_PATH + "testOptimisticLock/expected-testOptimisticLock.xlsx")
     void testOptimisticLock() {
 
         RequestEntity<String> request = RequestEntity.put(ENDPOINT + "/3")

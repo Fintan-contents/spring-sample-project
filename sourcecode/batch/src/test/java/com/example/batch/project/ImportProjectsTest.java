@@ -13,7 +13,7 @@ import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.spring.api.DBRider;
+import com.github.database.rider.junit5.api.DBRider;
 
 import ch.qos.logback.classic.Level;
 
@@ -42,9 +42,9 @@ public class ImportProjectsTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testNormalInsert/testNormalInsert.xls",
+            value = BASE_PATH + "/testNormalInsert/testNormalInsert.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql")
-    @ExpectedDataSet(BASE_PATH + "/testNormalInsert/expected-testNormalInsert.xls")
+    @ExpectedDataSet(BASE_PATH + "/testNormalInsert/expected-testNormalInsert.xlsx")
     void testNormalInsert() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -55,8 +55,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testNormalUpdate/testNormalUpdate.xls")
-    @ExpectedDataSet(BASE_PATH + "/testNormalUpdate/expected-testNormalUpdate.xls")
+    @DataSet(BASE_PATH + "/testNormalUpdate/testNormalUpdate.xlsx")
+    @ExpectedDataSet(BASE_PATH + "/testNormalUpdate/expected-testNormalUpdate.xlsx")
     void testNormalUpdate() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -67,8 +67,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testProjectNotFound/testProjectNotFound.xls")
-    @ExpectedDataSet(BASE_PATH + "/testProjectNotFound/expected-testProjectNotFound.xls")
+    @DataSet(BASE_PATH + "/testProjectNotFound/testProjectNotFound.xlsx")
+    @ExpectedDataSet(BASE_PATH + "/testProjectNotFound/expected-testProjectNotFound.xlsx")
     void testProjectNotFound() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
 
@@ -81,7 +81,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testOrganizationNotFound/testOrganizationNotFound.xls")
+    @DataSet(BASE_PATH + "/testOrganizationNotFound/testOrganizationNotFound.xlsx")
     void testOrganizationNotFound() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
 
@@ -94,7 +94,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testOrganizationIdIsDivision/testOrganizationIdIsDivision.xls")
+    @DataSet(BASE_PATH + "/testOrganizationIdIsDivision/testOrganizationIdIsDivision.xlsx")
     void testOrganizationIdIsDivision() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
 
@@ -108,9 +108,9 @@ public class ImportProjectsTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testMaxLengthInsert/testMaxLengthInsert.xls",
+            value = BASE_PATH + "/testMaxLengthInsert/testMaxLengthInsert.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql")
-    @ExpectedDataSet(BASE_PATH + "/testMaxLengthInsert/expected-testMaxLengthInsert.xls")
+    @ExpectedDataSet(BASE_PATH + "/testMaxLengthInsert/expected-testMaxLengthInsert.xlsx")
     void testMaxLengthInsert() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -121,8 +121,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMaxLengthUpdate/testMaxLengthUpdate.xls")
-    @ExpectedDataSet(BASE_PATH + "/testMaxLengthUpdate/expected-testMaxLengthUpdate.xls")
+    @DataSet(BASE_PATH + "/testMaxLengthUpdate/testMaxLengthUpdate.xlsx")
+    @ExpectedDataSet(BASE_PATH + "/testMaxLengthUpdate/expected-testMaxLengthUpdate.xlsx")
     void testMaxLengthUpdate() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -134,9 +134,9 @@ public class ImportProjectsTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testSort/testSort.xls",
+            value = BASE_PATH + "/testSort/testSort.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql")
-    @ExpectedDataSet(value = BASE_PATH + "/testSort/expected-testSort.xls")
+    @ExpectedDataSet(value = BASE_PATH + "/testSort/expected-testSort.xlsx")
     void testSort() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -148,9 +148,9 @@ public class ImportProjectsTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testMultiInsert/testMultiInsert.xls",
+            value = BASE_PATH + "/testMultiInsert/testMultiInsert.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql")
-    @ExpectedDataSet(value = BASE_PATH + "/testMultiInsert/expected-testMultiInsert.xls")
+    @ExpectedDataSet(value = BASE_PATH + "/testMultiInsert/expected-testMultiInsert.xlsx")
     void testMultiInsert() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -162,9 +162,9 @@ public class ImportProjectsTest extends BatchTestBase {
      */
     @Test
     @DataSet(
-            value = BASE_PATH + "/testMultiInsertWithValidationError/testMultiInsertWithValidationError.xls",
+            value = BASE_PATH + "/testMultiInsertWithValidationError/testMultiInsertWithValidationError.xlsx",
             executeScriptsBefore = BASE_PATH + "/reset_sequence_val_project.sql")
-    @ExpectedDataSet(value = BASE_PATH + "/testMultiInsertWithValidationError/expected-testMultiInsertWithValidationError.xls")
+    @ExpectedDataSet(value = BASE_PATH + "/testMultiInsertWithValidationError/expected-testMultiInsertWithValidationError.xlsx")
     void testMultiInsertWithValidationError() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -175,8 +175,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMultiUpdate/testMultiUpdate.xls")
-    @ExpectedDataSet(value = BASE_PATH + "/testMultiUpdate/expected-testMultiUpdate.xls")
+    @DataSet(BASE_PATH + "/testMultiUpdate/testMultiUpdate.xlsx")
+    @ExpectedDataSet(value = BASE_PATH + "/testMultiUpdate/expected-testMultiUpdate.xlsx")
     void testMultiUpdate() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -187,8 +187,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testMultiUpdateWithValidationError/testMultiUpdateWithValidationError.xls")
-    @ExpectedDataSet(value = BASE_PATH + "/testMultiUpdateWithValidationError/expected-testMultiUpdateWithValidationError.xls")
+    @DataSet(BASE_PATH + "/testMultiUpdateWithValidationError/testMultiUpdateWithValidationError.xlsx")
+    @ExpectedDataSet(value = BASE_PATH + "/testMultiUpdateWithValidationError/expected-testMultiUpdateWithValidationError.xlsx")
     void testMultiUpdateWithValidationError() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -199,7 +199,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testLog/testLog.xls")
+    @DataSet(BASE_PATH + "/testLog/testLog.xlsx")
     void testLog() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
 
@@ -212,7 +212,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testLogInValidationError/testLogInValidationError.xls")
+    @DataSet(BASE_PATH + "/testLogInValidationError/testLogInValidationError.xlsx")
     void testLogInValidationError() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
 
@@ -226,8 +226,8 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testEmptyWorkTable/testEmptyWorkTable.xls")
-    @ExpectedDataSet(value = BASE_PATH + "/testEmptyWorkTable/expected-testEmptyWorkTable.xls")
+    @DataSet(BASE_PATH + "/testEmptyWorkTable/testEmptyWorkTable.xlsx")
+    @ExpectedDataSet(value = BASE_PATH + "/testEmptyWorkTable/expected-testEmptyWorkTable.xlsx")
     void testEmptyWorkTable() throws Exception {
         jobLauncher.run(config.importProjectsJob(), jobParameters);
     }
@@ -238,7 +238,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testExitCodeNormal/testExitCodeNormal.xls")
+    @DataSet(BASE_PATH + "/testExitCodeNormal/testExitCodeNormal.xlsx")
     void testExitCodeNormal() throws Exception {
         int exitCode = getExitCode(jobLauncher.run(config.importProjectsJob(), jobParameters));
         assertThat(exitCode).isEqualTo(0);
@@ -250,7 +250,7 @@ public class ImportProjectsTest extends BatchTestBase {
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
      */
     @Test
-    @DataSet(BASE_PATH + "/testExitCodeWarning/testExitCodeWarning.xls")
+    @DataSet(BASE_PATH + "/testExitCodeWarning/testExitCodeWarning.xlsx")
     void testExitCodeWarning() throws Exception {
         int exitCode = getExitCode(jobLauncher.run(config.importProjectsJob(), jobParameters));
         assertThat(exitCode).isEqualTo(2);
