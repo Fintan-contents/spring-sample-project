@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<nablarch.version>5u21</nablarch.version>
 		<mybatis-spring-boot.version>2.3.0</mybatis-spring-boot.version>
 		<keel-transaction-token-check.version>1.0.0</keel-transaction-token-check.version>
