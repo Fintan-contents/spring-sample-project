@@ -2,7 +2,7 @@ package com.example.web.project.form;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.AssertTrue;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;

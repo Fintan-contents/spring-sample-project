@@ -2,7 +2,7 @@ package com.example.web.common.validation;
 
 import java.lang.annotation.Annotation;
 
-import javax.validation.Payload;
+import jakarta.validation.Payload;
 
 import nablarch.core.validation.ee.Domain;
 

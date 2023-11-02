@@ -69,7 +69,7 @@ public class ApiUsageTest {
     void testNoServletAPI() {
         noClasses()
                 .that(notType(ErrorViewResolverImpl.class, CsvFileDownloadView.class, UploadSupport.class))
-                .should().accessClassesThat().resideInAnyPackage("javax.servlet..")
+                .should().accessClassesThat().resideInAnyPackage("jakarta.servlet..")
                 .because("Servlet APIではなくSpring Web MVCのAPIを使用してください。")
                 .check(appJavaClasses);
     }
