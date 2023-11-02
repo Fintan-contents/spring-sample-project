@@ -76,7 +76,8 @@ public class WebSecurityConfig {
                 .headers(c -> c
                         // Referrer-Policyレスポンスヘッダの設定
                         // https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Referrer-Policy
-                        .referrerPolicy(ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
+                        .referrerPolicy(policy -> policy
+                                .policy(ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)))
                 .build();
     }
 
