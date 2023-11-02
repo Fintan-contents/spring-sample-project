@@ -62,6 +62,7 @@
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>${groovy.version.for-test}</version>
+			<scope>test</scope>
 		</dependency>
         <!-- JsrJobParametersConverterTestのポーティングで追加 -->
 		<dependency>
