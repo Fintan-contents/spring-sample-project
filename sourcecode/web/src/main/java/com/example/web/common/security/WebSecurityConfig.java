@@ -43,15 +43,15 @@ public class WebSecurityConfig {
                 // 認可の設定
                 .authorizeHttpRequests(c -> c
                         // ログイン画面は誰でも見られる
-                        .mvcMatchers("/login").permitAll()
+                        .requestMatchers("/login").permitAll()
                         // エラー画面は誰でも見られる
-                        .mvcMatchers("/error").permitAll()
+                        .requestMatchers("/error").permitAll()
                         // CSSとJSは誰でも参照できる
-                        .mvcMatchers("/css/**", "/js/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**").permitAll()
                         // ヘルスチェックのエンドポイントは認証しない
-                        .mvcMatchers("/actuator/health").permitAll()
+                        .requestMatchers("/actuator/health").permitAll()
                         // プロジェクト登録画面とプロジェクト更新画面、プロジェクトアップロード画面はプロマネしか見られない
-                        .mvcMatchers("/project/create/**", "/project/update/**", "/project/upload/**").hasAuthority("PROJECT_MANAGER")
+                        .requestMatchers("/project/create/**", "/project/update/**", "/project/upload/**").hasAuthority("PROJECT_MANAGER")
                         // 上記以外の画面は認証が必要
                         .anyRequest().authenticated())
 
