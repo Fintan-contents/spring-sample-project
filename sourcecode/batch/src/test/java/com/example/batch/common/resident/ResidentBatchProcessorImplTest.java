@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -766,17 +768,15 @@ class ResidentBatchProcessorImplTest {
 
         @Bean
         public Step step() {
-            return stepBuilderFactory
-                    .get("TEST")
-                    .tasklet(tasklet())
+            return new StepBuilder("TEST", jobRepository)
+                    .tasklet(tasklet(), platformTransactionManager)
                     .build();
         }
 
         @Bean
-        public Job job() {
-            return jobBuilderFactory
-                    .get("TEST")
-                    .start(step())
+        public Job job(Step step) {
+            return new JobBuilder("TEST", jobRepository)
+                    .start(step)
                     .build();
         }
     }

@@ -7,6 +7,8 @@ import org.mybatis.spring.batch.builder.MyBatisCursorItemReaderBuilder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,9 +102,8 @@ public class ExportProjectsInPeriodConfig extends BatchBaseConfig {
     public Step exportProjectsInPeriodStep() {
         int chunkSize = exportProjectsInPeriodProperties().getChunkSize();
 
-        return stepBuilderFactory
-                .get("BA1060101")
-                .<Project, ExportProjectsInPeriodItem> chunk(chunkSize)
+        return new StepBuilder("BA1060101", jobRepository)
+                .<Project, ExportProjectsInPeriodItem>chunk(chunkSize, platformTransactionManager)
                 .reader(exportProjectsInPeriodItemReader(null))
                 .processor(exportProjectsInPeriodItemProcessor)
                 .writer(exportProjectsInPeriodItemWriter())
@@ -117,8 +118,7 @@ public class ExportProjectsInPeriodConfig extends BatchBaseConfig {
      */
     @Bean
     public Job exportProjectsInPeriodJob() {
-        return jobBuilderFactory
-                .get("BA1060101")
+        return new JobBuilder("BA1060101", jobRepository)
                 .start(exportProjectsInPeriodStep())
                 .listener(loggingCountJobListener)
                 .build();

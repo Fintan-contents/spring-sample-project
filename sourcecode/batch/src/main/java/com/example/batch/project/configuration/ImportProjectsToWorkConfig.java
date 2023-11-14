@@ -7,6 +7,8 @@ import org.mybatis.spring.batch.builder.MyBatisBatchItemWriterBuilder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.LineMapper;
@@ -175,9 +177,8 @@ public class ImportProjectsToWorkConfig extends BatchBaseConfig {
     public Step importProjectsToWorkStep() {
         int chunkSize = importProjectsToWorkProperties().getChunkSize();
 
-        return stepBuilderFactory
-                .get("BA1060201")
-                .<ImportProjectsToWorkItem, ProjectWork> chunk(chunkSize)
+        return new StepBuilder("BA1060201", jobRepository)
+                .<ImportProjectsToWorkItem, ProjectWork> chunk(chunkSize, platformTransactionManager)
 
                 .reader(importProjectsToWorkItemReader())
                 .processor(importProjectsToWorkCompositeItemProcessor())
@@ -202,8 +203,7 @@ public class ImportProjectsToWorkConfig extends BatchBaseConfig {
      */
     @Bean
     public Job importProjectsToWorkJob() {
-        return jobBuilderFactory
-                .get("BA1060201")
+        return new JobBuilder("BA1060201", jobRepository)
                 .start(importProjectsToWorkStep())
                 .listener(loggingCountJobListener)
                 .build();

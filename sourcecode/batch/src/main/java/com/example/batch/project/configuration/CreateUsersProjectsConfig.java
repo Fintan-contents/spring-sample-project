@@ -12,6 +12,8 @@ import org.mybatis.spring.batch.builder.MyBatisCursorItemReaderBuilder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,9 +110,8 @@ public class CreateUsersProjectsConfig extends BatchBaseConfig {
     public Step createUsersProjectsStep() {
         int chunkSize = createUsersProjectsProperties().getChunkSize();
 
-        return stepBuilderFactory
-                .get("BA1060301")
-                .<Project, CreateUsersProjectsItem>chunk(chunkSize)
+        return new StepBuilder("BA1060301", jobRepository)
+                .<Project, CreateUsersProjectsItem>chunk(chunkSize, platformTransactionManager)
                 .reader(createUsersProjectsItemReader(0))
                 .processor(createUsersProjectsItemProcessor)
                 .writer(createUsersProjectsItemWriter(0))
@@ -126,8 +127,7 @@ public class CreateUsersProjectsConfig extends BatchBaseConfig {
      */
     @Bean
     public Job createUsersProjectsJob() {
-        return jobBuilderFactory
-                .get("BA1060301")
+        return new JobBuilder("BA1060301", jobRepository)
                 .start(createUsersProjectsStep())
                 .listener(loggingCountJobListener)
                 .build();
