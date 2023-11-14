@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,8 @@ import com.example.web.test.WebTest;
  * プロジェクト検索画面の入力値精査のテスト。
  *
  */
-@SpringBootTest(properties = "spring.session.store-type=none")
+@SpringBootTest
+@Import(ValidationTestBase.SessionRepositoryConfiguration.class)
 @WebTest
 @AutoConfigureMockMvc
 public class ProjectSearchFormTest extends ValidationTestBase {
