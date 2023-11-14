@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -41,7 +42,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeRequestProperties")
     @BatchTest
     @DBRider
-    static class MistakeRequestPropertiesTest {
+    @Nested
+    class MistakeRequestPropertiesTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -69,7 +71,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeTableName")
     @BatchTest
     @DBRider
-    static class MistakeTableNameTest {
+    @Nested
+    class MistakeTableNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -95,7 +98,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakePrimaryKeyName")
     @BatchTest
     @DBRider
-    static class MistakePrimaryKeyNameTest {
+    @Nested
+    class MistakePrimaryKeyNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -121,7 +125,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeStatusColumnName")
     @BatchTest
     @DBRider
-    static class MistakeStatusColumnNameTest {
+    @Nested
+    class MistakeStatusColumnNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -147,7 +152,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeSpringBatchJobName")
     @BatchTest
     @DBRider
-    static class MistakeSpringBatchJobNameTest {
+    @Nested
+    class MistakeSpringBatchJobNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -175,7 +181,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessTest {
+    @Nested
+    class SuccessTest {
 
         @Autowired
         TestConfig config;
@@ -205,7 +212,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith1RetryTest {
+    @Nested
+    class SuccessWith1RetryTest {
 
         @Autowired
         TestConfig config;
@@ -240,7 +248,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith2RetryTest {
+    @Nested
+    class SuccessWith2RetryTest {
 
         @Autowired
         TestConfig config;
@@ -275,7 +284,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith3RetryTest {
+    @Nested
+    class SuccessWith3RetryTest {
 
         @Autowired
         TestConfig config;
@@ -310,7 +320,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith4RetryTest {
+    @Nested
+    class SuccessWith4RetryTest {
 
         @Autowired
         TestConfig config;
@@ -345,7 +356,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class FailureWith4RetryTest {
+    @Nested
+    class FailureWith4RetryTest {
 
         @Autowired
         TestConfig config;
@@ -382,7 +394,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class FailureWithNotRetryOnExceptionTest {
+    @Nested
+    class FailureWithNotRetryOnExceptionTest {
 
         @Autowired
         TestConfig config;
@@ -417,7 +430,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestData1RecordTest {
+    @Nested
+    class RequestData1RecordTest {
 
         @Autowired
         TestConfig config;
@@ -447,7 +461,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestData2RecordsTest {
+    @Nested
+    class RequestData2RecordsTest {
 
         @Autowired
         TestConfig config;
@@ -477,7 +492,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestDataNPlus1RecordsTest {
+    @Nested
+    class RequestDataNPlus1RecordsTest {
 
         @Autowired
         TestConfig config;
@@ -507,7 +523,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class UnprocessedOnlyTest {
+    @Nested
+    class UnprocessedOnlyTest {
 
         @Autowired
         TestConfig config;
@@ -537,7 +554,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class StopTest {
+    @Nested
+    class StopTest {
 
         @Autowired
         TestConfig config;
@@ -577,7 +595,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SortTest {
+    @Nested
+    class SortTest {
 
         @Autowired
         TestConfig config;
@@ -607,7 +626,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStringPrimaryKey")
     @BatchTest
     @DBRider
-    static class StringPrimaryKeyTest {
+    @Nested
+    class StringPrimaryKeyTest {
 
         @Autowired
         TestConfig config;
@@ -643,7 +663,8 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStatus")
     @BatchTest
     @DBRider
-    static class StatusTest {
+    @Nested
+    class StatusTest {
 
         @Autowired
         TestConfig config;
