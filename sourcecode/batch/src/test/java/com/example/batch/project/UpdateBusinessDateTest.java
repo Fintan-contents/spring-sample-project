@@ -69,6 +69,26 @@ public class UpdateBusinessDateTest extends BatchTestBase {
     }
 
     /**
+     * 業務日付を指定して正常終了した場合のテスト。（ISO 8601形式）
+     *
+     * @throws Exception Spring Batchでエラーが発生した場合にスローされる
+     */
+    @Test
+    @DataSet(
+            value = BASE_PATH + "/testSpecifyBusinessDate/testSpecifyBusinessDate.xlsx"
+    )
+    @ExpectedDataSet(BASE_PATH + "/testSpecifyBusinessDate/expected-testSpecifyBusinessDate.xlsx")
+    void testSpecifyBusinessDate_ISO8601Format() throws Exception {
+        properties.setSegmentId("01");
+        JobParameters jobParameters = jobParametersBuilder()
+                .addString("businessDate", "2022-12-31")
+                .toJobParameters();
+
+        int exitCode = getExitCode(jobLauncher.run(config.updateBusinessDateJob(), jobParameters));
+        assertThat(exitCode).isEqualTo(0);
+    }
+
+    /**
      * 業務日付に最大長より大きい文字列を指定した場合のエラーのテスト。
      *
      * @throws Exception Spring Batchでエラーが発生した場合にスローされる
@@ -110,7 +130,7 @@ public class UpdateBusinessDateTest extends BatchTestBase {
     void testInvalidFormatBusinessDate() throws Exception {
         properties.setSegmentId("00");
         JobParameters jobParameters = jobParametersBuilder()
-                .addString("businessDate", "2022-12-31")
+                .addString("businessDate", "2022.12.31")
                 .toJobParameters();
 
         int exitCode = getExitCode(jobLauncher.run(config.updateBusinessDateJob(), jobParameters));
