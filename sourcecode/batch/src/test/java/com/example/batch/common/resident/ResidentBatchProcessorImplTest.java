@@ -2,6 +2,8 @@ package com.example.batch.common.resident;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeRequestProperties")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class MistakeRequestPropertiesTest {
 
@@ -71,6 +74,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeTableName")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class MistakeTableNameTest {
 
@@ -98,6 +102,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakePrimaryKeyName")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class MistakePrimaryKeyNameTest {
 
@@ -125,6 +130,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeStatusColumnName")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class MistakeStatusColumnNameTest {
 
@@ -152,6 +158,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeSpringBatchJobName")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class MistakeSpringBatchJobNameTest {
 
@@ -181,6 +188,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SuccessTest {
 
@@ -212,6 +220,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SuccessWith1RetryTest {
 
@@ -248,6 +257,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SuccessWith2RetryTest {
 
@@ -284,6 +294,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SuccessWith3RetryTest {
 
@@ -320,6 +331,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SuccessWith4RetryTest {
 
@@ -356,6 +368,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class FailureWith4RetryTest {
 
@@ -394,6 +407,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class FailureWithNotRetryOnExceptionTest {
 
@@ -430,6 +444,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class RequestData1RecordTest {
 
@@ -461,6 +476,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class RequestData2RecordsTest {
 
@@ -492,6 +508,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class RequestDataNPlus1RecordsTest {
 
@@ -523,6 +540,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class UnprocessedOnlyTest {
 
@@ -554,6 +572,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class StopTest {
 
@@ -595,6 +614,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class SortTest {
 
@@ -626,6 +646,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStringPrimaryKey")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class StringPrimaryKeyTest {
 
@@ -663,6 +684,7 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStatus")
     @BatchTest
     @DBRider
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
     @Nested
     class StatusTest {
 

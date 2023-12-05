@@ -5,6 +5,8 @@ import com.example.batch.project.configuration.UpdateBusinessDateConfig;
 import com.example.batch.project.configuration.UpdateBusinessDateProperties;
 import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.junit5.api.DBRider;
@@ -23,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class UpdateBusinessDateTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/UpdateBusinessDateTest";
 
