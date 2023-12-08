@@ -83,6 +83,7 @@
         <a th:href="@{/project/search/search}" class="btn btn-primary w-100" href="../search/index.html">戻る</a>
       </div>
       <div class="col-2">
+        <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
         <a
           sec:authorize-url="/project/update"
           th:href="@{/project/update/(projectId=${projectDto.projectId})}"
