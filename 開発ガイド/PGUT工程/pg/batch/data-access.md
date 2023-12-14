@@ -115,7 +115,7 @@ public class ImportProjectsItemWriter implements ItemWriter<Project> {
     private ImportProjectsMapper importProjectsMapper;
 
     @Override
-    public void write(List<? extends Project> items) {
+    public void write(Chunk<? extends Project> items) {
         // (1)
         for (Project project : items) {
             // (2)
