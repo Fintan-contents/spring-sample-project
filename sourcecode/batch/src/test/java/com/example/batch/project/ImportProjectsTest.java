@@ -2,6 +2,8 @@ package com.example.batch.project;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import ch.qos.logback.classic.Level;
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 @ActiveProfiles("ImportProjectsTest")
 public class ImportProjectsTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/ImportProjectsTest";

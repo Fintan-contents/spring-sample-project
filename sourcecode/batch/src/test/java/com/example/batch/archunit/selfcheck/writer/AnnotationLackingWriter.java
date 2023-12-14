@@ -1,7 +1,7 @@
 package com.example.batch.archunit.selfcheck.writer;
 
-import java.util.List;
 
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnnotationLackingWriter implements ItemWriter<Object> {
     @Override
-    public void write(List<?> items) throws Exception {
+    public void write(Chunk<?> items) throws Exception {
 
     }
 }

@@ -3,7 +3,7 @@ package com.example.web.project.form;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.AssertTrue;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;

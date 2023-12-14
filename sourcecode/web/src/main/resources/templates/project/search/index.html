@@ -214,6 +214,7 @@
         <tbody>
           <tr th:each="project : ${searchResult.content}" th:object="${project}">
             <td>
+              <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
               <a th:href="@{/project/detail/(projectId=*{projectId})}" href="../detail/index.html" th:text="*{projectName}"
                 >プロジェクト名1</a
               >

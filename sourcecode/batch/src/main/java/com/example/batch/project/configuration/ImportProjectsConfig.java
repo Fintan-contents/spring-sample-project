@@ -5,6 +5,8 @@ import org.mybatis.spring.batch.builder.MyBatisCursorItemReaderBuilder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +71,8 @@ public class ImportProjectsConfig extends BatchBaseConfig {
     public Step importProjectsStep() {
         int chunkSize = importProjectsProperties().getChunkSize();
 
-        return stepBuilderFactory
-                .get("BA1060202")
-                .<ProjectWork, Project> chunk(chunkSize)
+        return new StepBuilder("BA1060202", jobRepository)
+                .<ProjectWork, Project> chunk(chunkSize, platformTransactionManager)
 
                 .reader(importProjectsItemReader())
                 .processor(importProjectsItemProcessor)
@@ -95,8 +96,7 @@ public class ImportProjectsConfig extends BatchBaseConfig {
      */
     @Bean
     public Job importProjectsJob() {
-        return jobBuilderFactory
-                .get("BA1060202")
+        return new JobBuilder("BA1060202", jobRepository)
                 .start(importProjectsStep())
                 .listener(loggingCountJobListener)
                 .build();

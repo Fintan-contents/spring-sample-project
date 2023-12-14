@@ -3,15 +3,15 @@ package com.example.batch.common.listener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.StepExecution;
-import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.stereotype.Component;
 
 /**
  * ジョブの入力件数とスキップ件数をログに出力するリスナー。
  */
 @Component
-public class LoggingCountJobListener extends JobExecutionListenerSupport {
+public class LoggingCountJobListener implements JobExecutionListener {
 
     private final Logger logger = LoggerFactory.getLogger(LoggingCountJobListener.class);
 

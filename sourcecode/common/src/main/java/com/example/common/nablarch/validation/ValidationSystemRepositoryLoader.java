@@ -2,7 +2,7 @@ package com.example.common.nablarch.validation;
 
 import java.util.Map;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;

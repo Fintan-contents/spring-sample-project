@@ -4,6 +4,8 @@ import com.example.batch.common.configuration.BatchBaseConfig;
 import com.example.batch.project.tasklet.UpdateBusinessDateTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -40,9 +42,8 @@ public class UpdateBusinessDateConfig extends BatchBaseConfig {
      */
     @Bean
     public Step updateBusinessDateStep() {
-        return stepBuilderFactory
-                .get("BA1070101")
-                .tasklet(updateBusinessDateTasklet)
+        return new StepBuilder("BA1070101", jobRepository)
+                .tasklet(updateBusinessDateTasklet, platformTransactionManager)
                 .build();
     }
 
@@ -53,8 +54,7 @@ public class UpdateBusinessDateConfig extends BatchBaseConfig {
      */
     @Bean
     public Job updateBusinessDateJob() {
-        return jobBuilderFactory
-                .get("BA1070101")
+        return new JobBuilder("BA1070101", jobRepository)
                 .start(updateBusinessDateStep())
                 .build();
     }

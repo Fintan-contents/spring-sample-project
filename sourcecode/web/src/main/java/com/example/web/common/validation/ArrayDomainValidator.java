@@ -1,7 +1,7 @@
 package com.example.web.common.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.DomainValidator;

@@ -1,7 +1,7 @@
 package com.example.common.nablarch.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * 指定された整数の範囲の金額であることを検証するバリデータ。

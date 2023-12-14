@@ -1,8 +1,16 @@
+# Spring Boot 3.2で、SnakeYAMLのバージョンが2.2に更新されました。
+# SnakeYAML 2.0で、tag機能（!!～）を使ってコンストラクタを呼ぶことができなくなったため、
+# Database Rider 1.41.0時点では、replacerをYAMLファイルから設定できなくなっています。
+#
+# replacerは@DBUnitアノテーションで設定しなくてはいけなくなっているのですが、
+# @DBUnitアノテーションとdbunit.ymlを併用することは出来ないので、全てアノテーションで設定する必要があります。
+# そのため本ファイルは実質的には必要ないのですが、設定ファイル例として残しています。
+#
 cacheConnection: false
 properties:
   caseSensitiveTableNames: true
-  replacers:
-    - !!com.github.database.rider.core.replacers.DateTimeReplacer {}
-    - !!com.github.database.rider.core.replacers.UnixTimestampReplacer {}
-    - !!com.github.database.rider.core.replacers.NullReplacer {}
-    - !!com.example.batch.test.SystemDateTextReplacer {}
+# replacers:
+#   - !!com.github.database.rider.core.replacers.DateTimeReplacer {}
+#   - !!com.github.database.rider.core.replacers.UnixTimestampReplacer {}
+#   - !!com.github.database.rider.core.replacers.NullReplacer {}
+#   - !!com.example.batch.test.SystemDateTextReplacer {}

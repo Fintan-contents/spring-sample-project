@@ -48,13 +48,15 @@ class CsvFileDownloadViewTest {
         try (InputStream in = new ClassPathResource(TARGET_FILE_BASE_PATH + "test.csv").getInputStream()) {
             expectedContent = in.readAllBytes();
         }
-        mvc
-                .perform(get("/test1"))
-                .andExpectAll(
-                        status().isOk(),
-                        content().contentType("text/csv"),
-                        content().bytes(expectedContent),
-                        header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''download.csv"));
+    mvc.perform(get("/test1"))
+        .andExpectAll(
+            status().isOk(),
+            content().contentType("text/csv"),
+            content().bytes(expectedContent),
+            header()
+                .string(
+                    HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"=?UTF-8?Q?download.csv?=\"; filename*=UTF-8''download.csv"));
     }
 
     @Test

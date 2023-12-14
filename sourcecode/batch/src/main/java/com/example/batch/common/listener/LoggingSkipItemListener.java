@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.listener.SkipListenerSupport;
+import org.springframework.batch.core.SkipListener;
 import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -19,7 +19,7 @@ import com.example.batch.common.item.LineNumberItem;
  * スキップされたアイテムの情報をログに出力するリスナー。
  */
 @Component
-public class LoggingSkipItemListener extends SkipListenerSupport<Object, Object> {
+public class LoggingSkipItemListener implements SkipListener<Object, Object> {
     private final Logger logger = LoggerFactory.getLogger(LoggingSkipItemListener.class);
 
     @Autowired

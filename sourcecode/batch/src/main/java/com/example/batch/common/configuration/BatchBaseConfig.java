@@ -1,8 +1,7 @@
 package com.example.batch.common.configuration;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.batch.common.listener.LoggingCountChunkListener;
@@ -10,6 +9,7 @@ import com.example.batch.common.listener.LoggingCountJobListener;
 import com.example.batch.common.listener.LoggingSkipItemListener;
 import com.example.batch.common.mapper.BatchCommonMapper;
 import com.example.common.util.BusinessDateSupplier;
+import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * 各バッチジョブのConfigで共通する実装をまとめたクラス。
@@ -19,9 +19,9 @@ import com.example.common.util.BusinessDateSupplier;
  */
 public abstract class BatchBaseConfig {
     @Autowired
-    protected JobBuilderFactory jobBuilderFactory;
+    protected JobRepository jobRepository;
     @Autowired
-    protected StepBuilderFactory stepBuilderFactory;
+    protected PlatformTransactionManager platformTransactionManager;
     @Autowired
     protected SqlSessionFactory sqlSessionFactory;
     @Autowired
