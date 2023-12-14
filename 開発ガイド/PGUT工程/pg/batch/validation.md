@@ -75,7 +75,7 @@ public class ImportProjectsToWorkConfig extends BatchBaseConfig {
     public Step importProjectsToWorkStep() {
         // 省略
 
-        return stepBuilderFactory
+        return new StepBuilder("BA1060201", jobRepository)
                 // 省略
                 .processor(importProjectsToWorkCompositeItemProcessor()) // (8)
                 // 省略
@@ -148,7 +148,7 @@ public class SampleConfig extends BatchBaseConfig {
 
     @Bean
     public Job sampleJob() {
-        return jobBuilderFactory
+        return new JobBuilder("BA0000000", jobRepository)
                 // 省略
                 .validator(sampleJobParametersValidator()) // (5)
                 .build();
@@ -182,7 +182,7 @@ public class SampleConfig extends BatchBaseConfig {
 
     @Bean
     public Job sampleJob() {
-        return jobBuilderFactory
+        return new JobBuilder("BA0000000", jobRepository)
                 // 省略
                 .validator(sampleJobParametersValidator()) // (3)
                 .build();
@@ -221,7 +221,7 @@ public class SampleConfig extends BatchBaseConfig {
 
     @Bean
     public Job sampleJob() {
-        return jobBuilderFactory
+        return new JobBuilder("BA0000000", jobRepository)
                 // 省略
                 .validator(sampleCompositeJobParametersValidator()) // (4)
                 .build();

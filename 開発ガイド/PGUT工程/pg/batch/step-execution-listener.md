@@ -62,7 +62,7 @@ public class CreateUsersProjectsConfig extends BatchBaseConfig {
     public Step createUsersProjectsStep() {
         int chunkSize = createUsersProjectsProperties().getChunkSize();
 
-        return stepBuilderFactory
+        return new StepBuilder("BA1060301", jobRepository)
                 // 途中の実装は省略
                 .listener(createUserProjectsStepExecutionListener) // (2)
                 .build();
