@@ -167,7 +167,7 @@ public class PostRequestSamapleService {
     - `RestTemplate`のインスタンスは、Web APIの連携を行うクラスに`RestTemplate`のフィールドを定義し`@Autowired`を付けることでフィールドインジェクションで取得する
   - (2) `postForEntity`メソッドで、POSTリクエストを送信できる
     - この他にも、`RestTemplate`にはHTTPメソッドごとにリクエスト送信用のメソッドが用意されている。これらは、対応するHTTPメソッドの名前で始まるようになっており、例えばGETメソッドには`getForEntity`というメソッドが用意されている。  
-      個々のメソッドの詳しい使い方は、[`RestTemplate`のJavadoc](https://docs.spring.io/spring-framework/docs/5.3.20/javadoc-api/org/springframework/web/client/RestTemplate.html)を参照
+      個々のメソッドの詳しい使い方は、[`RestTemplate`のJavadoc](https://docs.spring.io/spring-framework/docs/6.1.x/javadoc-api/org/springframework/web/client/RestTemplate.html)を参照
   - (3) `postForEntity`メソッドの第一引数には、送信先のパスを設定する
     - URLのスキームからポート番号までのベース部分（`https://xxxx:8080`）は共通的な仕組みで設定済みなので、各リクエストではパスを設定するだけとなる
     - パスの先頭は`/`から始めること
@@ -277,7 +277,7 @@ ResponseEntity<PostRequestSampleResponseDto> exchange = restTemplate
 - 実装のポイント
   - (1) 任意のリクエストヘッダーを設定してリクエストを送信する場合は、`RequestEntity`を作成して`exchange`メソッドでリクエストを送信する
     - `RequestEntity`のインスタンスは、`RequestEntity`に用意された`static`メソッドで生成する
-    - HTTPメソッドごとにメソッドが用意されているので、それを利用する。ここでは、`post`メソッドを使ってPOSTメソッド用のインスタンスを生成している。その他のメソッドについては[RequestEntityのJavadoc](https://docs.spring.io/spring-framework/docs/5.3.20/javadoc-api/org/springframework/http/RequestEntity.html)を参照
+    - HTTPメソッドごとにメソッドが用意されているので、それを利用する。ここでは、`post`メソッドを使ってPOSTメソッド用のインスタンスを生成している。その他のメソッドについては[RequestEntityのJavadoc](https://docs.spring.io/spring-framework/docs/6.1.x/javadoc-api/org/springframework/http/RequestEntity.html)を参照
     - `post`メソッドの引数には、パスを設定する
   - (2) 一部のよく設定されるヘッダーは、専用の設定用のメソッドが用意されている
   - (3) それ以外の任意のヘッダーを設定したい場合は、`header`メソッドを使用する

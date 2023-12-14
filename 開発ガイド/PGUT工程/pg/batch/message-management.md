@@ -2,10 +2,10 @@
 
 - [メッセージの定義方法](#メッセージの定義方法)
 - [メッセージの種類](#メッセージの種類)
-    - [業務エラーメッセージ](#業務エラーメッセージ)
-    - [精査エラーメッセージ](#精査エラーメッセージ)
-    - [Itemのフィールド名](#itemのフィールド名)
-    - [エラー以外の情報メッセージ](#エラー以外の情報メッセージ)
+  - [業務エラーメッセージ](#業務エラーメッセージ)
+  - [精査エラーメッセージ](#精査エラーメッセージ)
+  - [Itemのフィールド名](#itemのフィールド名)
+  - [エラー以外の情報メッセージ](#エラー以外の情報メッセージ)
 
 ## メッセージの定義方法
 
@@ -79,7 +79,7 @@ public class ImportProjectsItemProcessor implements ItemProcessor<ProjectWork, P
 
     - (1)特定フィールド（この例では`clientId`）に固有のメッセージを割り当てたい場合は、`typeMismatch.[フィールド名]`をメッセージIDとする
     - (2)特定の型への型変換エラー（この例では`java.lang.Integer`への型変換エラー）に対する汎用的なメッセージIDは、`typeMismatch.[対象となる型の完全修飾名]`とする
-    - ※何らかの理由で上記以外のメッセージIDとしたい場合は[DefaultMessageCodesResolverのJavaDoc](https://docs.spring.io/spring-framework/docs/5.3.x/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html)を参照。
+    - ※何らかの理由で上記以外のメッセージIDとしたい場合は[DefaultMessageCodesResolverのJavaDoc](https://docs.spring.io/spring-framework/docs/6.1.x/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html)を参照。
 
 - アノテーションを使用した単項目精査、項目間精査  
 
