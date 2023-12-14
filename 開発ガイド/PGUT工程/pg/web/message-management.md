@@ -98,10 +98,10 @@ public class ProjectUpdateService {
 単項目精査でエラーとなった場合の精査エラーメッセージにフォームコントロールの名前を含めるには、メッセージに`{0}`を指定する。
 フォームコントロールの名前はデフォルトでは`Form`のフィールド名が使用される。（以下の例では`projectName`）`messages.properties`に`フィールド名=表示したいフォームコントロールの名前`を定義することで、適切な名称をメッセージに含めることができる。
 
-以下のようなメッセージが定義された`messages.properties`と`jakarta.validation.constraints.NotNull`を付与したフィールドを持つ`Form`がある場合、`projectName`の入力がなかった場合は「PJ名を入力してください。」というメッセージが生成される。
+以下のようなメッセージが定義された`messages.properties`と`javax.validation.constraints.NotNull`を付与したフィールドを持つ`Form`がある場合、`projectName`の入力がなかった場合は「PJ名を入力してください。」というメッセージが生成される。
 
 ```properties
-jakarta.validation.constraints.NotNull.message={0}を入力してください。
+javax.validation.constraints.NotNull.message={0}を入力してください。
 projectName=PJ名
 ```
 
