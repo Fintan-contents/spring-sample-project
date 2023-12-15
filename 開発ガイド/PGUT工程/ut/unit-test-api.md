@@ -154,6 +154,7 @@ src
     ```java
     @SpringBootTest // (1)
     @DBRider // (2)
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
     @ApiTest // (3)
     class ExampleCommonServiceTest {
         private static final String BASE_PATH = "com/example/api/service/ExampleCommonServiceTest/";
@@ -172,7 +173,7 @@ src
 
     - 実装のポイント
         - (1)`@SpringBootTest`をつける。これによりテスト対象のコンポーネントをテストクラスにインジェクションできるようになる
-        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
         - (3)テスト用の不要なクラスが起動されないように`@ApiTest`をつける
         - (4)テスト対象のコンポーネントをインジェクションする
         - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する
@@ -187,6 +188,7 @@ src
     ```java
     @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // (1)
     @DBRider // (2)
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
     @ApiTest // (3)
     class ClientCreateControllerTest extends RestControllerTestBase { // (4)
         
@@ -210,7 +212,7 @@ src
 
     - 実装のポイント
         - (1)`@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`をつける。これによりアプリケーションが起動しHTTPリクエストを受け取れるようになる
-        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
         - (3)テスト用の不要なクラスが起動されないように`@ApiTest`をつける
         - (4)`RestControllerTestBase`を継承する。これにより入力値・期待値のJSONファイルを簡易に読み込むメソッドとHTTPクライアントとして`TestRestTemplate`が利用できる
         - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する

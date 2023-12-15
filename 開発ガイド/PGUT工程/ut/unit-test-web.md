@@ -128,6 +128,7 @@ src
 ```java
 @SpringBootTest // (1)
 @DBRider // (2)
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
 @WebTest // (3)
 class ProjectCommonServiceTest {
 
@@ -150,7 +151,7 @@ class ProjectCommonServiceTest {
 
 - 実装のポイント
     - (1)`@SpringBootTest`をつける。これによりテスト対象のコンポーネントをテストクラスにインジェクションできるようになる
-    - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+    - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
     - (3)テスト用の不要なクラスが起動されないように`@WebTest`をつける
     - (4)テスト対象のコンポーネントをインジェクションする
     - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する
