@@ -95,6 +95,6 @@ mvn package -DskipTests
 
 プラグインの詳細は次のウェブサイトを参照してください。
 
-- https://docs.spring.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#packaging
-- https://spring.pleiades.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#packaging ※非公式・有志による日本語訳
+- https://docs.spring.io/spring-boot/docs/3.2.x/maven-plugin/reference/htmlsingle/#packaging
+- https://spring.pleiades.io/spring-boot/docs/3.2.x/maven-plugin/reference/htmlsingle/#packaging ※非公式・有志による日本語訳
 
