@@ -154,7 +154,7 @@ public class PostRequestSamapleService {
             PostRequestSampleResponseDto.class // (5)
         );
 
-        HttpStatus statusCode = response.getStatusCode(); // (7)
+        HttpStatusCode statusCode = response.getStatusCode(); // (7)
         HttpHeaders headers = response.getHeaders(); // (8)
         PostRequestSampleResponseDto responseDto = response.getBody(); // (9)
         // 省略
@@ -305,7 +305,7 @@ try {
     // 省略
 } catch (HttpClientErrorException e) { // (1)
     // 4xx系のレスポンスが返された場合
-    HttpStatus statusCode = e.getStatusCode(); // (5)
+    HttpStatusCode statusCode = e.getStatusCode(); // (5)
     HttpHeaders responseHeaders = e.getResponseHeaders(); // (5)
     String responseBodyAsString = e.getResponseBodyAsString(); // (5)
 } catch (HttpServerErrorException e) { // (2)

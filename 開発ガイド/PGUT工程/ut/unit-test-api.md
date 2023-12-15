@@ -203,7 +203,7 @@ src
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(read("testCreateClient/request.json")); // (8)
             ResponseEntity<String> response = http.exchange(request, String.class); // (9)
-            assertEquals(HttpStatus.CREATED, response.getStatusCode()); // (10)
+            assertEquals(HttpStatusCode.CREATED, response.getStatusCode()); // (10)
             assertThat(forJson(response.getBody()))
                     .isStrictlyEqualToJson(read("testCreateClient/expected.json")); // (11)
         }
