@@ -17,7 +17,7 @@ package com.example.batch.project.listener; // (1)
 
 @Component // (2)
 @StepScope // (2)
-public class CreateUserProjectsStepExecutionListener implements JobExecutionListener { // (3), (4)
+public class CreateUserProjectsStepExecutionListener implements StepExecutionListener { // (3), (4)
     
     @Autowired // (5)
     private CreateUsersProjectsMapper createUsersProjectsMapper;
