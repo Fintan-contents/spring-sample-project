@@ -40,7 +40,7 @@ public class CreateUserProjectsStepExecutionListener implements StepExecutionLis
     - (2) 作成した`StepExecutionListener`には、`@Component`と`@StepScope`アノテーションを設定する
     - (3) Bean名が他のバッチ処理と重複しないようにするため、クラス名は論理的な名前かバッチ処理IDを元に命名する。  
       このとき、接尾辞には`StepExecutionListener`をつけること（バッチ処理IDを用いる場合は`BA1010101StepExecutionListener`など）
-    - (4) `JobExecutionListener`を実装して作成する
+    - (4) `StepExecutionListener`を実装して作成する
     - (5) 依存するBeanのインスタンスはフィールドに`@Autowired`をつけて、フィールドインジェクションで取得する
     - (6) 前処理を実装する場合は`beforeStep`メソッドを、後処理を実装する場合は`afterStep`メソッドをオーバーライドして実装する
     - (7) `afterStep`メソッドを実装した場合、戻り値は`null`を返すように実装する
