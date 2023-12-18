@@ -27,7 +27,7 @@ Spring Boot Maven Pluginを使用して起動します。
 起動時にジョブ名を指定します。
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.names=BA1060201
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.name=BA1060201
 ```
 
 #### ワークテーブルから本テーブルに登録するバッチ
@@ -36,7 +36,7 @@ Spring Boot Maven Pluginを使用して起動します。
 起動時にジョブ名を指定します。
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.names=BA1060202
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.name=BA1060202
 ```
 
 ### 期間内プロジェクト一括出力
@@ -45,7 +45,7 @@ Spring Boot Maven Pluginを使用して起動します。
 起動時にジョブ名を指定します。
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.names=BA1060101
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.name=BA1060101
 ```
 
 デフォルトでは`work/BA1060101/output`の下に`N21AA002.csv`という名前で出力されます。
@@ -59,9 +59,10 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--spring.batch.job.names=BA10601
 Spring Boot Maven Pluginを使用して起動します。
 起動時にジョブID(`resident-batch.job-id`)とジョブ名(`resident-batch.spring-batch-job-name`)、
 常駐バッチ起動を有効にするオプション(`resident-batch.enabled`)を指定します。
+また、Spring Bootによる自動バッチ起動を無効化するオプション(`spring.batch.job.enabled=false`)も指定します。
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments="--resident-batch.enabled=true --resident-batch.job-id=BA1060301 --resident-batch.spring-batch-job-name=BA1060301"
+mvn spring-boot:run -Dspring-boot.run.arguments="--resident-batch.enabled=true --resident-batch.job-id=BA1060301 --resident-batch.spring-batch-job-name=BA1060301 --spring.batch.job.enabled=false"
 ```
 
 バッチが起動し、プロセスが常駐します。
@@ -78,7 +79,7 @@ Spring Boot Maven Pluginを使用して起動します。
 起動時にジョブ名と更新する業務日付の区分を指定します。
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments="--spring.batch.job.names=BA1070101 --project.update-business-date.segment-id=00"
+mvn spring-boot:run -Dspring-boot.run.arguments="--spring.batch.job.name=BA1070101 --project.update-business-date.segment-id=00"
 ```
 
 デフォルトではシステム日付で指定された区分の業務日付が更新されます。
@@ -94,6 +95,6 @@ mvn package -DskipTests
 
 プラグインの詳細は次のウェブサイトを参照してください。
 
-- https://docs.spring.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#packaging
-- https://spring.pleiades.io/spring-boot/docs/2.7.x/maven-plugin/reference/htmlsingle/#packaging ※非公式・有志による日本語訳
+- https://docs.spring.io/spring-boot/docs/3.2.x/maven-plugin/reference/htmlsingle/#packaging
+- https://spring.pleiades.io/spring-boot/docs/3.2.x/maven-plugin/reference/htmlsingle/#packaging ※非公式・有志による日本語訳
 

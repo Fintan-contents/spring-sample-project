@@ -43,7 +43,7 @@ public class FileDownloadSampleTasklet implements Tasklet {
             responseExtractor // (5)
         );
 
-        HttpStatus statusCode = response.getStatusCode(); // (6)
+        HttpStatusCode statusCode = response.getStatusCode(); // (6)
         HttpHeaders headers = response.getHeaders(); // (6)
         // 省略
         return RepeatStatus.FINISHED;
@@ -152,7 +152,7 @@ public class FileUploadSampleTasklet implements Tasklet {
             responseExtractor // (6)
         );
 
-        HttpStatus statusCode = response.getStatusCode(); // (7)
+        HttpStatusCode statusCode = response.getStatusCode(); // (7)
         HttpHeaders headers = response.getHeaders(); // (7)
         FileUploadSampleResponseDto body = response.getBody(); // (7)
         // 省略

@@ -2,16 +2,16 @@
 
 - [テスト単位](#テスト単位)
 - [テスト実施方法](#テスト実施方法)
-    - [テストデータ作成](#テストデータ作成)
-        - [テストデータの配置場所](#テストデータの配置場所)
-        - [データベース (テスト実施前)](#データベース-テスト実施前)
-        - [SQLファイル (テスト実施前)](#sqlファイル-テスト実施前)
-        - [データベース (期待値)](#データベース-期待値)
-        - [入力値（リクエスト)](#入力値リクエスト)
-        - [期待値（レスポンス)](#期待値レスポンス)
-    - [テストコード作成](#テストコード作成)
-        - [モジュール単位の自動テスト](#モジュール単位の自動テスト)
-        - [画面・バッチ単位の自動テスト](#画面バッチ単位の自動テスト)
+  - [テストデータ作成](#テストデータ作成)
+    - [テストデータの配置場所](#テストデータの配置場所)
+    - [データベース (テスト実施前)](#データベース-テスト実施前)
+    - [SQLファイル (テスト実施前)](#sqlファイル-テスト実施前)
+    - [データベース (期待値)](#データベース-期待値)
+    - [入力値（リクエスト)](#入力値リクエスト)
+    - [期待値（レスポンス)](#期待値レスポンス)
+  - [テストコード作成](#テストコード作成)
+    - [モジュール単位の自動テスト](#モジュール単位の自動テスト)
+    - [画面・バッチ単位の自動テスト](#画面バッチ単位の自動テスト)
 
 ## テスト単位
 
@@ -154,6 +154,7 @@ src
     ```java
     @SpringBootTest // (1)
     @DBRider // (2)
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
     @ApiTest // (3)
     class ExampleCommonServiceTest {
         private static final String BASE_PATH = "com/example/api/service/ExampleCommonServiceTest/";
@@ -172,7 +173,7 @@ src
 
     - 実装のポイント
         - (1)`@SpringBootTest`をつける。これによりテスト対象のコンポーネントをテストクラスにインジェクションできるようになる
-        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
         - (3)テスト用の不要なクラスが起動されないように`@ApiTest`をつける
         - (4)テスト対象のコンポーネントをインジェクションする
         - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する
@@ -187,6 +188,7 @@ src
     ```java
     @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // (1)
     @DBRider // (2)
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
     @ApiTest // (3)
     class ClientCreateControllerTest extends RestControllerTestBase { // (4)
         
@@ -201,7 +203,7 @@ src
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(read("testCreateClient/request.json")); // (8)
             ResponseEntity<String> response = http.exchange(request, String.class); // (9)
-            assertEquals(HttpStatus.CREATED, response.getStatusCode()); // (10)
+            assertEquals(HttpStatusCode.CREATED, response.getStatusCode()); // (10)
             assertThat(forJson(response.getBody()))
                     .isStrictlyEqualToJson(read("testCreateClient/expected.json")); // (11)
         }
@@ -210,14 +212,14 @@ src
 
     - 実装のポイント
         - (1)`@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`をつける。これによりアプリケーションが起動しHTTPリクエストを受け取れるようになる
-        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+        - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
         - (3)テスト用の不要なクラスが起動されないように`@ApiTest`をつける
         - (4)`RestControllerTestBase`を継承する。これにより入力値・期待値のJSONファイルを簡易に読み込むメソッドとHTTPクライアントとして`TestRestTemplate`が利用できる
         - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する
             - 追加でSQLを実行する場合は`executeScriptsBefore`に、[SQLファイル (テスト実施前)](#sqlファイル-テスト実施前)で作成したファイルを`src/test/resources`からの相対パスで指定する
         - (6)データベースの検証を行うには`@ExpectedDataSet`をつける。[データベース (期待値)](#データベース-期待値)で作成したテストデータを`src/test/resources`からの相対パスで指定する
         - (7)テストメソッド名は「`test` + テストで確認している観点がわかる論理的な名前」とする
-        - (8)[RequestEntity](https://docs.spring.io/spring-framework/docs/5.3.x/javadoc-api/org/springframework/http/RequestEntity.html)を使ってリクエストを生成する。リクエストボディには[入力値 (リクエスト)](#入力値リクエスト)で作成したJSONファイルを`RestControllerTestBase#read`で読み込み設定する
+        - (8)[RequestEntity](https://docs.spring.io/spring-framework/docs/6.1.x/javadoc-api/org/springframework/http/RequestEntity.html)を使ってリクエストを生成する。リクエストボディには[入力値 (リクエスト)](#入力値リクエスト)で作成したJSONファイルを`RestControllerTestBase#read`で読み込み設定する
         - (9)`TestRestTemplate`を使ってHTTPリクエストを実行しレスポンスを受け取る。`TestRestTemplate`は`RestControllerTestBase`に`http`という名前で定義されている
         - (10)レスポンスのHTTPステータスコードを検証する
         - (11)レスポンスボディを検証する。[期待値（レスポンス)](#期待値レスポンス)で作成したJSONファイルを`RestControllerTestBase#read`で読み込みレスポンスボディと一致するか比較検証する。検証には[AssertJ](https://assertj.github.io/doc/)というライブラリを使用している

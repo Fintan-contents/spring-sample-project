@@ -52,7 +52,7 @@ public class SampleConfig extends BatchBaseConfig {
 
     @Bean
     public Step sampleStep() {
-        return stepBuilderFactory.get("BA1010101")
+        return new StepBuilder("BA1010101", jobRepository)
                 // 省略
                 .processor(sampleItemWriter(null)) // (4)
                 // 省略

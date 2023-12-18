@@ -181,6 +181,7 @@ CSVファイルの出力機能を持つバッチ処理をテストする場合�
 @BatchTest // (1)
 @SpringBootTest // (1)
 @DBRider // (2)
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
 public class ImportProjectsTest extends BatchTestBase { // (3)
     private static final String BASE_PATH = "com/example/batch/project/ImportProjectsTest";
 
@@ -203,7 +204,7 @@ public class ImportProjectsTest extends BatchTestBase { // (3)
 
 - 実装のポイント
   - (1) バッチのテストクラスには`@BatchTest`と`@SpringBootTest`を設定する
-  - (2) DBのセットアップや検証を行う場合は、`@DBRider`を設定する
+  - (2) DBのセットアップや検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`を設定する
   - (3) バッチのテストクラスは、`BatchTestBase`を継承すること
   - (4) テスト対象となるバッチ処理の`Config`をフィールドで定義して、`@Autowired`を付ける
   - (5) `BatchTestBase`に用意されている`jobParametersBuilder`メソッドを使って、`JobParameters`を生成する
@@ -223,6 +224,7 @@ public class ImportProjectsTest extends BatchTestBase { // (3)
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class ImportProjectsToWorkTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/ImportProjectsToWorkTest";
     private static final String INPUT_FILE = "work/BA1060201/input/N21AA001.csv"; // (1)
@@ -267,6 +269,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 class ExportProjectsInPeriodTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/ExportProjectsInPeriodTest";
     private static final Path OUTPUT_FILE = Path.of("work/BA1060101/output/N21AA002.csv"); // (1)
@@ -303,6 +306,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class ImportProjectsToWorkTest extends BatchTestBase {
     //省略
 
@@ -354,6 +358,7 @@ public class ImportProjectsToWorkTest extends BatchTestBase {
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 class ExportProjectsInPeriodTest extends BatchTestBase {
     // 省略
 
@@ -410,6 +415,7 @@ class ExportProjectsInPeriodTest extends BatchTestBase {
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class ImportProjectsIntegrationTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/ImportProjectsIntegrationTest";
     private static final String INPUT_FILE = "work/BA1060201/input/N21AA001.csv";
