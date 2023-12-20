@@ -2,6 +2,15 @@
 
 リリース日と主な変更点は次の通りです。
 
+## 2023-12-25
+
+- 変更
+    - Spring Boot を 3.2 へバージョンアップ([#1](https://github.com/Fintan-contents/spring-sample-project/pull/1),
+      [#2](https://github.com/Fintan-contents/spring-sample-project/pull/2),
+      [#3](https://github.com/Fintan-contents/spring-sample-project/pull/3))
+- バグフィックス
+    - 開発ガイドでリンク先の誤りを修正([#3](https://github.com/Fintan-contents/spring-sample-project/pull/3))
+
 ## 2023-01-27
 
 - 改善
