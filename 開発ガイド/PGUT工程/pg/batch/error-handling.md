@@ -17,7 +17,7 @@ public class ImportProjectsToWorkConfig extends BatchBaseConfig {
 
     @Bean
     public Step importProjectsToWorkStep() {
-        return stepBuilderFactory
+        return new StepBuilder("BA1060201", jobRepository)
                 // 省略
 
                 .faultTolerant() // (1)

@@ -1,10 +1,15 @@
 package com.example.web.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.session.MapSessionRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.validation.BindingResult;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Formのバリデーションをテストするためのテスト基底クラス。
@@ -38,5 +43,17 @@ public abstract class ValidationTestBase {
      */
     protected String getErrorMessage(BindingResult bindingResult, String field) {
         return messageSource.getMessage(bindingResult.getFieldError(field), null);
+    }
+
+    /**
+     * WORKAROUND: Spring Session JDBCがMockMVCのsessionを無視してしまうIssueの対応。
+     *   https://github.com/spring-projects/spring-session/issues/2037
+     */
+    @TestConfiguration
+    public static class SessionRepositoryConfiguration {
+        @Bean
+        public MapSessionRepository mapSessionRepository() {
+            return new MapSessionRepository(new ConcurrentHashMap<>());
+        }
     }
 }

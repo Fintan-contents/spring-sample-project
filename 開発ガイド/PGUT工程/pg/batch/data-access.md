@@ -115,7 +115,7 @@ public class ImportProjectsItemWriter implements ItemWriter<Project> {
     private ImportProjectsMapper importProjectsMapper;
 
     @Override
-    public void write(List<? extends Project> items) {
+    public void write(Chunk<? extends Project> items) {
         // (1)
         for (Project project : items) {
             // (2)
@@ -271,7 +271,7 @@ public class ImportProjectsToWorkConfig extends BatchBaseConfig {
     
     @Bean
     public Step importProjectsToWorkStep() {
-        return stepBuilderFactory
+        return new StepBuilder("BA1060201", jobRepository)
                 // 省略
                 .listener(importProjectsToWorkTruncateTableListener()) // (4)
                 .build();

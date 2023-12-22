@@ -1,6 +1,6 @@
 package com.example.common.nablarch.validation;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;

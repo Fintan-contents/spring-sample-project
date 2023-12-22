@@ -128,6 +128,7 @@ src
 ```java
 @SpringBootTest // (1)
 @DBRider // (2)
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true) // (2)
 @WebTest // (3)
 class ProjectCommonServiceTest {
 
@@ -150,7 +151,7 @@ class ProjectCommonServiceTest {
 
 - 実装のポイント
     - (1)`@SpringBootTest`をつける。これによりテスト対象のコンポーネントをテストクラスにインジェクションできるようになる
-    - (2)データベースのセットアップ/検証を行う場合は`@DBRider`をつける
+    - (2)データベースのセットアップ/検証を行う場合は`@DBRider`と`@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)`をつける
     - (3)テスト用の不要なクラスが起動されないように`@WebTest`をつける
     - (4)テスト対象のコンポーネントをインジェクションする
     - (5)データベースのセットアップを行うには`@DataSet`をつける。[データベース (テスト実施前)](#データベース-テスト実施前)で作成したテストデータを`src/test/resources`からの相対パスで指定する
@@ -163,37 +164,39 @@ class ProjectCommonServiceTest {
 ### テストコード作成
 
 ```java
-@SpringBootTest(properties = "spring.session.store-type=none") // (1)
-@WebTest // (2)
-@AutoConfigureMockMvc // (3)
-public class ProjectCreateFormTest extends ValidationTestBase { // (4)(5)
+@SpringBootTest // (1)
+@Import(ValidationTestBase.SessionRepositoryConfiguration.class) // (2)
+@WebTest // (3)
+@AutoConfigureMockMvc // (4)
+public class ProjectCreateFormTest extends ValidationTestBase { // (5)(6)
 
-    // (6)
+    // (7)
     private static final String CONFIRM_PATH = "/project/create/confirm";
     private static final String EXECUTE_PATH = "/project/create/execute?execute";
     private static final String FORM_NAME = "projectCreateForm";
     private static final String TOKEN_NAME = "project/create";
 
-    @Test // (7)
-    @WithMockUser(authorities = "PROJECT_MANAGER") // (8)
+    @Test // (8)
+    @WithMockUser(authorities = "PROJECT_MANAGER") // (9)
     void testConfirmRequired() throws Exception {
         // 内容は後述
     }
 ```
 
 - 実装のポイント
-    - (1) `@SpringBootTest(properties = "spring.session.store-type=none")`を付ける
-    - (2) `@WebTest`を付ける
-    - (3) `@AutoConfigureMockMvc`を付ける
-    - (4) テストクラス名はテスト対象の`Form`のクラス名に`Test`を付けたものとする
-    - (5) `ValidationTestBase`を継承する。`ValidationTestBase`には`Form`の自動テストで使用する共通の処理が定義されている
-    - (6) いくつかの定数を定義する
+    - (1) `@SpringBootTest`を付ける
+    - (2) `@Import(ValidationTestBase.SessionRepositoryConfiguration.class)`を付ける
+    - (3) `@WebTest`を付ける
+    - (4) `@AutoConfigureMockMvc`を付ける
+    - (5) テストクラス名はテスト対象の`Form`のクラス名に`Test`を付けたものとする
+    - (6) `ValidationTestBase`を継承する。`ValidationTestBase`には`Form`の自動テストで使用する共通の処理が定義されている
+    - (7) いくつかの定数を定義する
         - `XXX_PATH`には「確認」や「登録」といった画面のイベントに対応するURLを設定する（`XXX`にはイベントを表す名前を付ける）。URLはルートからの相対パスとする
         - `FORM_NAME`にはテスト対象となる`Form`の名前を設定する。`Form`の名前はクラスの単純名をlowerCamelCaseにしたものとする
         - `TOKEN_NAME`には二重サブミット防止のため`Controller`のクラスに付けた`@TransactionTokenCheck`で設定した名前を設定する
-    - (7) テストメソッドには`@Test`を付ける。テストメソッド名は「`test` + テストで確認している観点がわかる論理的な名前」とする。テストの内容については後述する
+    - (8) テストメソッドには`@Test`を付ける。テストメソッド名は「`test` + テストで確認している観点がわかる論理的な名前」とする。テストの内容については後述する
         - パラメータ化テストを行う場合は`@Test`ではなく`@ParameterizedTest`を付ける。詳しくはJUnit 5のマニュアルを参照すること
-    - (8) ログイン認証をモック化するために`@WithMockUser`を付ける
+    - (9) ログイン認証をモック化するために`@WithMockUser`を付ける
         - また、必要に応じて`authorities`に権限を設定する。自動テストはここで設定した権限を付与して実行される
 
 #### リクエストを送信する

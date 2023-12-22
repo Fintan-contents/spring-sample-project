@@ -3,7 +3,7 @@ package com.example.web.archunit.selfcheck.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.ServletRequest;
+import jakarta.servlet.ServletRequest;
 
 /**
  * 適切でないAPI使用が行われているControllerクラス。

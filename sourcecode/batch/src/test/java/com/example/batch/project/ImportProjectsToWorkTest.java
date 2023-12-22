@@ -2,6 +2,8 @@ package com.example.batch.project;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
@@ -32,6 +34,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class ImportProjectsToWorkTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/ImportProjectsToWorkTest";
     private static final String INPUT_FILE = "work/BA1060201/input/N21AA001.csv";

@@ -1,6 +1,5 @@
 package com.example.api.common.error;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

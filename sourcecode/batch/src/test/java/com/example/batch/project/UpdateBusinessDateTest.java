@@ -5,6 +5,8 @@ import com.example.batch.project.configuration.UpdateBusinessDateConfig;
 import com.example.batch.project.configuration.UpdateBusinessDateProperties;
 import com.example.batch.test.BatchTest;
 import com.example.batch.test.BatchTestBase;
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.junit5.api.DBRider;
@@ -23,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @BatchTest
 @SpringBootTest
 @DBRider
+@DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
 public class UpdateBusinessDateTest extends BatchTestBase {
     private static final String BASE_PATH = "com/example/batch/project/UpdateBusinessDateTest";
 
@@ -62,6 +65,26 @@ public class UpdateBusinessDateTest extends BatchTestBase {
         properties.setSegmentId("01");
         JobParameters jobParameters = jobParametersBuilder()
                 .addString("businessDate", "20221231")
+                .toJobParameters();
+
+        int exitCode = getExitCode(jobLauncher.run(config.updateBusinessDateJob(), jobParameters));
+        assertThat(exitCode).isEqualTo(0);
+    }
+
+    /**
+     * 業務日付を指定して正常終了した場合のテスト。（ISO 8601形式）
+     *
+     * @throws Exception Spring Batchでエラーが発生した場合にスローされる
+     */
+    @Test
+    @DataSet(
+            value = BASE_PATH + "/testSpecifyBusinessDate/testSpecifyBusinessDate.xlsx"
+    )
+    @ExpectedDataSet(BASE_PATH + "/testSpecifyBusinessDate/expected-testSpecifyBusinessDate.xlsx")
+    void testSpecifyBusinessDate_ISO8601Format() throws Exception {
+        properties.setSegmentId("01");
+        JobParameters jobParameters = jobParametersBuilder()
+                .addString("businessDate", "2022-12-31")
                 .toJobParameters();
 
         int exitCode = getExitCode(jobLauncher.run(config.updateBusinessDateJob(), jobParameters));
@@ -110,7 +133,7 @@ public class UpdateBusinessDateTest extends BatchTestBase {
     void testInvalidFormatBusinessDate() throws Exception {
         properties.setSegmentId("00");
         JobParameters jobParameters = jobParametersBuilder()
-                .addString("businessDate", "2022-12-31")
+                .addString("businessDate", "2022.12.31")
                 .toJobParameters();
 
         int exitCode = getExitCode(jobLauncher.run(config.updateBusinessDateJob(), jobParameters));

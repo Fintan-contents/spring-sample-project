@@ -2,14 +2,19 @@ package com.example.batch.common.resident;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.batch.test.SystemDateTextReplacer;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +44,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeRequestProperties")
     @BatchTest
     @DBRider
-    static class MistakeRequestPropertiesTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class MistakeRequestPropertiesTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -67,7 +74,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeTableName")
     @BatchTest
     @DBRider
-    static class MistakeTableNameTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class MistakeTableNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -93,7 +102,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakePrimaryKeyName")
     @BatchTest
     @DBRider
-    static class MistakePrimaryKeyNameTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class MistakePrimaryKeyNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -119,7 +130,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeStatusColumnName")
     @BatchTest
     @DBRider
-    static class MistakeStatusColumnNameTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class MistakeStatusColumnNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -145,7 +158,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestMistakeSpringBatchJobName")
     @BatchTest
     @DBRider
-    static class MistakeSpringBatchJobNameTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class MistakeSpringBatchJobNameTest {
 
         @Autowired
         ResidentBatchProcessorImpl sut;
@@ -173,7 +188,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SuccessTest {
 
         @Autowired
         TestConfig config;
@@ -203,7 +220,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith1RetryTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SuccessWith1RetryTest {
 
         @Autowired
         TestConfig config;
@@ -238,7 +257,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith2RetryTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SuccessWith2RetryTest {
 
         @Autowired
         TestConfig config;
@@ -273,7 +294,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith3RetryTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SuccessWith3RetryTest {
 
         @Autowired
         TestConfig config;
@@ -308,7 +331,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SuccessWith4RetryTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SuccessWith4RetryTest {
 
         @Autowired
         TestConfig config;
@@ -343,7 +368,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class FailureWith4RetryTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class FailureWith4RetryTest {
 
         @Autowired
         TestConfig config;
@@ -380,7 +407,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class FailureWithNotRetryOnExceptionTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class FailureWithNotRetryOnExceptionTest {
 
         @Autowired
         TestConfig config;
@@ -415,7 +444,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestData1RecordTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class RequestData1RecordTest {
 
         @Autowired
         TestConfig config;
@@ -445,7 +476,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestData2RecordsTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class RequestData2RecordsTest {
 
         @Autowired
         TestConfig config;
@@ -475,7 +508,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class RequestDataNPlus1RecordsTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class RequestDataNPlus1RecordsTest {
 
         @Autowired
         TestConfig config;
@@ -505,7 +540,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class UnprocessedOnlyTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class UnprocessedOnlyTest {
 
         @Autowired
         TestConfig config;
@@ -535,7 +572,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class StopTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class StopTest {
 
         @Autowired
         TestConfig config;
@@ -575,7 +614,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTest")
     @BatchTest
     @DBRider
-    static class SortTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class SortTest {
 
         @Autowired
         TestConfig config;
@@ -605,7 +646,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStringPrimaryKey")
     @BatchTest
     @DBRider
-    static class StringPrimaryKeyTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class StringPrimaryKeyTest {
 
         @Autowired
         TestConfig config;
@@ -641,7 +684,9 @@ class ResidentBatchProcessorImplTest {
     @ActiveProfiles(profiles = "ResidentBatchProcessorImplTestStatus")
     @BatchTest
     @DBRider
-    static class StatusTest {
+    @DBUnit(replacers = {SystemDateTextReplacer.class}, cacheConnection = false, caseSensitiveTableNames = true)
+    @Nested
+    class StatusTest {
 
         @Autowired
         TestConfig config;
@@ -766,17 +811,15 @@ class ResidentBatchProcessorImplTest {
 
         @Bean
         public Step step() {
-            return stepBuilderFactory
-                    .get("TEST")
-                    .tasklet(tasklet())
+            return new StepBuilder("TEST", jobRepository)
+                    .tasklet(tasklet(), platformTransactionManager)
                     .build();
         }
 
         @Bean
-        public Job job() {
-            return jobBuilderFactory
-                    .get("TEST")
-                    .start(step())
+        public Job job(Step step) {
+            return new JobBuilder("TEST", jobRepository)
+                    .start(step)
                     .build();
         }
     }

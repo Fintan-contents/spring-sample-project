@@ -20,20 +20,24 @@
             </a>
           </li>
           <li class="page-item" th:classappend="${page.hasPrevious() ? '' : 'disabled'}">
+            <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
             <a class="page-link" th:href="@{__${path}__/(pageNumber=${page.previousOrFirstPageable().pageNumber})}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
           <li class="page-item" th:classappend="${pageNumber == page.number} ? 'active' : ''"  th:each="pageNumber : ${@pagingViewHelper.getPageNumbers(page)}">
+            <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
             <a class="page-link" th:if="${pageNumber != page.number}" th:href="@{__${path}__/(pageNumber=${pageNumber})}" th:text="${pageNumber + 1}">1</a>
             <span class="page-link" th:if="${pageNumber == page.number}" th:text="${pageNumber + 1}"></span>
           </li>
           <li class="page-item" th:classappend="${page.hasNext() ? '' : 'disabled'}">
+            <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
             <a class="page-link" th:href="@{__${path}__/(pageNumber=${page.nextOrLastPageable().pageNumber})}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
           <li class="page-item" th:classappend="${page.hasNext() ? '' : 'disabled'}">
+            <!-- FIXME: Trailing Slash（TrailingSlashMatchの設定デモ用にあえてtrailing slashを残しています。） -->
             <a class="page-link" th:href="@{__${path}__/(pageNumber=${page.totalPages - 1})}" aria-label="Next" >
               <span aria-hidden="true">&raquo;&raquo;</span>
             </a>

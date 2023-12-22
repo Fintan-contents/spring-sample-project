@@ -21,9 +21,9 @@ public class LoggingCountChunkListener extends ChunkListenerSupport {
     @Override
     public void afterChunk(ChunkContext context) {
         StepExecution stepExecution = context.getStepContext().getStepExecution();
-        int inputCount = stepExecution.getReadCount() + stepExecution.getReadSkipCount();
-        int skipCount = stepExecution.getSkipCount();
-        int commitCount = stepExecution.getCommitCount();
+        long inputCount = stepExecution.getReadCount() + stepExecution.getReadSkipCount();
+        long skipCount = stepExecution.getSkipCount();
+        long commitCount = stepExecution.getCommitCount();
         logger.info("入力件数={}, スキップ件数={}, コミット回数={}", inputCount, skipCount, commitCount);
     }
 }

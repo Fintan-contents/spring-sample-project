@@ -31,8 +31,8 @@ public class BusinessDateSupplier {
     /**
      * デフォルトのセグメントの業務日付を取得する。
      * <p>
-     * システムプロパティ {@code businessDate} が設定されている場合、そちらの日付が優先される。<br>
-     * 例: {@code -DbusinessDate=20210102}
+     * プロパティ {@code businessDate.fixedDate} が設定されている場合、そちらの日付が優先される。<br>
+     * 例: {@code -DbusinessDate.fixedDate=20210102}
      * </p>
      * @return 業務日付
      */
